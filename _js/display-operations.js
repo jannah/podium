@@ -6,6 +6,8 @@
 var canvas;
 var fontSize = 1;
 var speed = 0;
+var minSpeed = 50;
+var maxSpeed = 250;
 $(document).ready(function() {
 
     init();
@@ -14,6 +16,7 @@ $(document).ready(function() {
 
 function init()
 {
+    resizeDiv();
     canvas = $('#text-canvas');
     addMenuEvents();
 }
@@ -80,19 +83,85 @@ function addMenuEvents()
     });
 
 
+    canvas.scroll(function()
+    {
+        var progress = Math.ceil(getProgress() * 100) + '%';
+
+        var bar = $('#progress-bar');
+        bar.css('width', progress);
+        bar.text(progress);
+
+
+    })
+
+
 }
 
 function updateSlider(value) {
     console.log(value);
-    speed = value;
+
+
+    speed = (value === 0) ? 0 : minSpeed + value * 10;
     pageScroll();
 
 }
 function pageScroll() {
-  /*  while (speed > 0)
-    {
-        window.scrollBy(0, speed);
-        scrolldelay = setTimeout('pageScroll()', 10);
-    }
-    */
+
+
+    var text = grabText();
+
+    var wordCount = getWordCount(text);
+    var duration = wordCount / speed;
+    var remainingDuration = duration * 60 * 100 * getProgress();
+
+    console.log(speed + "wpm\t" + remainingDuration + "ms");
+
+    canvas.stop().animate({
+        scrollTop: getRemainingScroll() + 'px'
+    }, remainingDuration);
+
+
+}
+
+
+window.onresize = function(event) {
+    resizeDiv();
+};
+
+function resizeDiv()
+{
+    var vpw = $(window).width();
+    var vph = $(window).height();
+    $('#content').css({'height': vph + 'px'});
+}
+function getWordCount(text)
+{
+    var text = text + "";
+    var words = text.split(" ");
+    console.log(words);
+    console.log('Words=' + words.length);
+    return words.length;
+}
+
+function getProgress()
+{
+    var remainingScroll = getRemainingScroll();
+    var h = canvas.get(0).scrollHeight;
+    var remainingScrollFactor = remainingScroll / h;
+    return remainingScrollFactor;
+}
+
+function getRemainingScroll()
+{
+    var currentScroll = parseInt(canvas.scrollTop());
+    var remainingScroll = canvas.get(0).scrollHeight - currentScroll;
+    console.log('remainingScroll=' + remainingScroll);
+    return remainingScroll;
+}
+
+function grabText()
+{
+    var text = canvas.text();
+    console.log(text);
+    return text;
 }

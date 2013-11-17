@@ -15,9 +15,9 @@ and open the template in the editor.
 
         <!-- link to javascript files -->
         <script src="_js/jquery-1.10.2.min.js"></script>
-                <script src="_js/dojo.js"></script>
+        <script src="_js/dojo.js"></script>
 
-        
+
         <script src="_js/script.js"></script>   
         <script src="_js/main-menu.js"></script>
         <script src="_js/file-operations.js"></script>    
@@ -28,15 +28,14 @@ and open the template in the editor.
     <body>
         <div id="content">
 
-            <section id="main-menu">
-                <div id="main-menu-wrapper">
-                    <input type="button" id="new-file-button" class="main-menu-button" value="New" onClick="newFile()"/>
-                    <input type="button" id="open-file-button" class="main-menu-button" value="Open" onClick="openFile()"/>
-                    <input type="file" id="open-file" onChange='openFile()'/>
-                    <input type="button" id="import-file-button" class="main-menu-button" value="Import" onClick="importFile()"/>
-                </div>
 
-            </section>
+            <div id="main-menu" class="menu">
+                <input type="button" id="new-file-button" class="main-menu-button" value="New" onClick="newFile()"/>
+                <input type="button" id="open-file-button" class="main-menu-button" value="Open" onClick="openFile()"/>
+                <input type="file" id="open-file" onChange='openFile()'/>
+                <input type="button" id="import-file-button" class="main-menu-button" value="Import" onClick="importFile()"/>
+            </div>
+
 
             <div id="right-menu" class='menu'>
                 <div id="slider">
@@ -73,6 +72,9 @@ and open the template in the editor.
                     <li id='mode-keyword'>Keyword</li>
                 </ul>
             </div>
+            <div id="progress-area">
+                <label id='progress-bar'></label>
+            </div>
             <div id="bottom_menu">
 
 
@@ -80,13 +82,9 @@ and open the template in the editor.
             <div id="timer"></div>
             <div id="canvas">
                 <div id='text-canvas' contenteditable="true">
-                    MY TEXT here
+
                 </div>
             </div>
-            <div id="buttons"></div>
-            <div id="next_feed"></div>
-
         </div>
-
     </body>
 </html>

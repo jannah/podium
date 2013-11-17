@@ -33,8 +33,7 @@ function readFileAsText(file)
             var para = paragraphs[i];
             para = cleanParagraph(para);
             var out = "<div id='paragraph-" + i + "' class='paragraph'>"
-                    + "<table><tr><td>"
-                    +"<label id='paragraph-lable-i' class='paragraph-label'>" + i + "</label>"
+                    + "<table><tr><td class='paragraph-label'>" + i 
                     + "</td><td><p>" + para + "<p></td><td>"
                     + "<div id='paragraph-time-" + i + "' class='paragraph-time'>" + "</div>"
                     + "</td></tr></table></div>";
