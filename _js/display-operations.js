@@ -19,6 +19,7 @@ function init()
     resizeDiv();
     canvas = $('#text-canvas');
     addMenuEvents();
+    updateProgressBar();
 }
 
 
@@ -26,9 +27,11 @@ function addMenuEvents()
 {
     $('#serif').click(function() {
         canvas.css('font-family', 'serif');
+        pageScroll();
     });
     $('#sans-serif').click(function() {
         canvas.css('font-family', 'sans-serif');
+        pageScroll();
     });
     $('#bigger-text').click(function() {
 //        var size = parseFloat(canvas.css('font-size'));
@@ -36,6 +39,7 @@ function addMenuEvents()
         fontSize += 0.25;
 //        console.log(size);
         canvas.css('font-size', fontSize + 'em');
+        pageScroll();
     });
     $('#smaller-text').click(function() {
 //        var size = parseFloat(canvas.css('font-size'));
@@ -43,6 +47,7 @@ function addMenuEvents()
         fontSize -= 0.25;
 //        console.log(size);
         canvas.css('font-size', fontSize + 'em');
+        pageScroll();
     });
     $('#theme-bw').click(function() {
         canvas.css('background-color', 'black');
@@ -64,43 +69,53 @@ function addMenuEvents()
 
     $('#compact').click(function() {
         $('.paragraph').css('line-height', '1');
+        pageScroll();
     });
     $('#normal').click(function() {
         $('.paragraph').css('line-height', '1.5');
+        pageScroll();
     });
     $('#stretch').click(function() {
         $('.paragraph').css('line-height', '2');
+        pageScroll();
     });
 
     $('#mode-full').click(function() {
         $('.sentence').css('display', 'inline');
         $('.word').css('display', 'inline');
+        pageScroll();
     });
 
     $('#mode-first').click(function() {
         $('.word').css('display', 'inline');
         $('.sentence').css('display', 'none');
         $('.sentence-1').css('display', 'inline');
-
+        pageScroll();
 
     });
     $('#mode-keyword').click(function() {
         $('.sentence').css('display', 'inline');
         $('.word').css('display', 'none');
         $('.highlighted-word').css('display', 'inline');
-
+        pageScroll();
     });
 
     canvas.scroll(function()
     {
-        var progress = Math.ceil(getProgress() * 100) + '%';
+        var progress = updateProgressBar();
 
-        var bar = $('#progress-bar');
-        bar.css('width', progress);
-        bar.text(progress);
+        /*  console.log("Scroll Top=" + canvas.scrollTop()
+         + "\tScroll Height=" + canvas.get(0).scrollHeight
+         + "\tRemaining Scroll =" + (canvas.get(0).scrollHeight - canvas.scrollTop())
+         + "\tProgress=" + progress);
+         */
+        if (progress >= 100)
+        {
+            canvas.stop();
+        }
+        
 
-
-    })
+    });
 
 
 }
@@ -108,27 +123,29 @@ function addMenuEvents()
 function updateSlider(value) {
     console.log(value);
 
-
+    value = parseInt(value);
     speed = (value === 0) ? 0 : minSpeed + value * 10;
     pageScroll();
 
 }
 function pageScroll() {
 
+    if (speed === 1)
+        canvas.stop();
+    else {
+        var text = grabText();
 
-    var text = grabText();
+        var wordCount = getWordCount(text);
+        var duration = wordCount / speed;
+        var remainingDuration = duration * 60 * 100 * (1 - getProgress());
 
-    var wordCount = getWordCount(text);
-    var duration = wordCount / speed;
-    var remainingDuration = duration * 60 * 100 * getProgress();
+        console.log(speed + "wpm\t" + remainingDuration + "ms");
 
-    console.log(speed + "wpm\t" + remainingDuration + "ms");
+        canvas.stop().animate({
+            scrollTop: canvas.get(0).scrollHeight + 'px'
+        }, remainingDuration);
 
-    canvas.stop().animate({
-        scrollTop: getRemainingScroll() + 'px'
-    }, remainingDuration);
-
-
+    }
 }
 
 
@@ -146,17 +163,18 @@ function getWordCount(text)
 {
     var text = text + "";
     var words = text.split(" ");
-    console.log(words);
+//    console.log(words);
     console.log('Words=' + words.length);
     return words.length;
 }
 
 function getProgress()
 {
-    var remainingScroll = getRemainingScroll();
-    var h = canvas.get(0).scrollHeight;
-    var remainingScrollFactor = remainingScroll / h;
-    return remainingScrollFactor;
+    var canvasH = parseInt(canvas.css('height'));
+    var currentScroll = parseInt(canvas.scrollTop());
+    var scrollH = canvas.get(0).scrollHeight;
+    var progress = currentScroll / (scrollH - canvasH);
+    return progress;
 }
 
 function getRemainingScroll()
@@ -170,7 +188,7 @@ function getRemainingScroll()
 function grabText()
 {
     var text = canvas.text();
-    console.log(text);
+//    console.log(text);
     return text;
 }
 
@@ -187,4 +205,16 @@ function addWordEvents()
         else
             self.addClass('highlighted-word');
     })
+}
+
+function updateProgressBar()
+{
+    var progress = Math.ceil(getProgress() * 100) + '%';
+
+    var bar = $('#progress-bar');
+    bar.css('width', progress);
+    bar.text(progress);
+
+    return progress;
+
 }

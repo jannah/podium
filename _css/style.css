@@ -129,6 +129,13 @@ input[type='range']::-webkit-slider-thumb {
 
 }
 
+.first-paragraph{
+    padding-top: 20%;
+}
+
+.last-paragraph{
+    padding-bottom: 20%;
+}
 .paragraph-label{
     /* height: 100%; */
     /* float:left; */
