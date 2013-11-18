@@ -74,14 +74,22 @@ function addMenuEvents()
 
     $('#mode-full').click(function() {
         $('.sentence').css('display', 'inline');
+        $('.word').css('display', 'inline');
     });
 
     $('#mode-first').click(function() {
+        $('.word').css('display', 'inline');
         $('.sentence').css('display', 'none');
         $('.sentence-1').css('display', 'inline');
 
-    });
 
+    });
+    $('#mode-keyword').click(function() {
+        $('.sentence').css('display', 'inline');
+        $('.word').css('display', 'none');
+        $('.highlighted-word').css('display', 'inline');
+
+    });
 
     canvas.scroll(function()
     {
@@ -164,4 +172,19 @@ function grabText()
     var text = canvas.text();
     console.log(text);
     return text;
+}
+
+
+function addWordEvents()
+{
+    $('.word').unbind('click');
+    $('.word').on('click', function()
+    {
+        var self = $(this);
+        console.log(self.text() + ' clicked');
+        if (self.hasClass('highlighted-word'))
+            self.removeClass('highlighted-word');
+        else
+            self.addClass('highlighted-word');
+    })
 }

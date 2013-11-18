@@ -146,6 +146,11 @@ input[type='range']::-webkit-slider-thumb {
     font-style:italic;
 }
 
+
+.highlighted-word{
+    font-weight: bolder;
+}
+
 #progress-area{
     position:absolute;
     z-index:100;
