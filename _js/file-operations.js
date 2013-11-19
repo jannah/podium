@@ -31,9 +31,9 @@ function readFileAsText(file)
         for (var i = 0, j = paragraphs.length; i < j; i++)
         {
             var para = paragraphs[i];
-            para = cleanParagraph(para, i);
+            para = cleanParagraph(para);
             var out = "<div id='paragraph-" + i + "' class='paragraph'>"
-                    + "<table><tr><td class='paragraph-label'>" + i
+                    + "<table><tr><td class='paragraph-label'>" + i 
                     + "</td><td><p>" + para + "<p></td><td>"
                     + "<div id='paragraph-time-" + i + "' class='paragraph-time'>" + "</div>"
                     + "</td></tr></table></div>";
@@ -43,13 +43,12 @@ function readFileAsText(file)
         console.log(output);
 
         $('#text-canvas').empty().append(output);
-        addWordEvents();
 
     };
     reader.readAsText(file);
 }
 
-function cleanParagraph(para, paraIndex)
+function cleanParagraph(para)
 {
     para = para.trim();
     para = para.replace('  ', ' ');
@@ -68,20 +67,10 @@ function cleanParagraph(para, paraIndex)
             continue;
         }
         else {
-            var words = sentence.split(' ');
-            var wout = "";
-            for (var k = 0, l = words.length; k < l; k++)
-            {
 
-                var word = words[k];
-                if (word && word.length > 0)
-                    wout += "<span id='word-" + paraIndex + "-" + i + "-" + k
-                            + "' class='word-" + k + " word'>"
-                            + word + " </span>";
-            }
             outCount++;
-            sout = "<span id='sentence-" + paraIndex + "-" + i + "' class='sentence sentence-" + outCount + "' class='sentence'>"
-                    + wout.trim() + " </span>";
+            sout = "<span class='sentence sentence-" + outCount + "' class='sentence'>"
+                    + sentence.trim() + " </span>";
 //            console.log(sout);
             output += sout;
         }
