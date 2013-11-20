@@ -44,8 +44,11 @@ function init()
     
     addMenuEvents();
     setCanvasHeight();
+<<<<<<< HEAD
     updateProgressBar();
     
+=======
+>>>>>>> be42b4e753389a0d7f13b4149d2eb98ee99a7052
 }
 
 function setCanvasHeight()
@@ -131,13 +134,17 @@ function addMenuEvents()
 
     $('#mode-full').click(function() {
         $('.sentence').css('display', 'inline');
+<<<<<<< HEAD
         $('.word').css('display', 'inline');
         pageScroll();
+=======
+>>>>>>> be42b4e753389a0d7f13b4149d2eb98ee99a7052
     });
 
     $('#mode-first').click(function() {
         $('.sentence').css('display', 'none');
         $('.sentence-1').css('display', 'inline');
+<<<<<<< HEAD
         pageScroll();
 
     });
@@ -147,6 +154,11 @@ function addMenuEvents()
         $('.highlighted-word').css('display', 'inline');
         pageScroll();
     });
+=======
+
+    });
+
+>>>>>>> be42b4e753389a0d7f13b4149d2eb98ee99a7052
 
     canvas.scroll(function()
     {
@@ -239,6 +251,7 @@ function grabText()
     var text = canvas.text();
 //    console.log(text);
     return text;
+<<<<<<< HEAD
 }
 
 
@@ -267,3 +280,6 @@ function updateProgressBar()
     return progress;
 
 }
+=======
+}
+>>>>>>> be42b4e753389a0d7f13b4149d2eb98ee99a7052

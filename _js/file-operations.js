@@ -31,12 +31,18 @@ function readFileAsText(file)
         for (var i = 0, j = paragraphs.length; i < j; i++)
         {
             var para = paragraphs[i];
+<<<<<<< HEAD
             para = cleanParagraph(para, i);
             var out = "<div id='paragraph-" + i + "' class='paragraph"
                     + ((i === 0) ? " first-paragraph" : "")
                     + ((i === (j - 1)) ? " last-paragraph" : "")
                     + "'>"
                     + "<table><tr><td class='paragraph-label'>" + i
+=======
+            para = cleanParagraph(para);
+            var out = "<div id='paragraph-" + i + "' class='paragraph'>"
+                    + "<table><tr><td class='paragraph-label'>" + i 
+>>>>>>> be42b4e753389a0d7f13b4149d2eb98ee99a7052
                     + "</td><td><p>" + para + "<p></td><td>"
                     + "<div id='paragraph-time-" + i + "' class='paragraph-time'>" + "</div>"
                     + "</td></tr></table></div>";
