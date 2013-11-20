@@ -18,9 +18,7 @@ function openFile()
     var file = fileSelector.get(0).files[0];
   
     console.log(file);
-  processFile(file);
-
-
+  	processFile(file);
 }
 
 function importFile()

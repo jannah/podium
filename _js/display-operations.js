@@ -4,6 +4,13 @@
  * and open the template in the editor.
  */
 var canvas;
+var body;
+var slider;
+var navpanel;
+
+var btnOpenFile;
+var inpOpenFile;
+
 var fontSize = 1;
 var speed = 0;
 var minSpeed = 50;
@@ -17,11 +24,44 @@ $(document).ready(function() {
 function init()
 {
     resizeDiv();
+    
     canvas = $('#text-canvas');
+    body = $('#page');
+    slider = $('#right-menu');
+    navpanel = $('#nav-panel');
+    
+    btnOpenFile = $('#openfile');
+    inpOpenFile = $('#open-file');
+    
+    inpOpenFile.css('opacity', 0);
+    inpOpenFile.css('filter','alpha(opacity = 0');
+    inpOpenFile.hide();
+    
+    btnOpenFile.click(function() {
+    	inpOpenFile.trigger('click');
+    	return false;
+    });
+    
     addMenuEvents();
+    setCanvasHeight();
     updateProgressBar();
+    
 }
 
+function setCanvasHeight()
+{
+	var elem = (document.compatMode === "CSS1Compat") ? 
+    document.documentElement :
+    document.body;
+
+	var height = elem.clientHeight - 53;
+	var width = elem.clientWidth;
+	
+	canvas.css('height', (height - 50));
+	slider.css('height', (height));
+	body.css('height', height);
+	navpanel.css('height', height);
+}
 
 function addMenuEvents()
 {
@@ -52,17 +92,26 @@ function addMenuEvents()
     $('#theme-bw').click(function() {
         canvas.css('background-color', 'black');
         canvas.css('color', 'white');
+        
+        body.css('background-color', 'black');
+        body.css('color', 'white');
 
     });
     $('#theme-wb').click(function() {
         canvas.css('background-color', 'white');
         canvas.css('color', 'black');
+        
+        body.css('background-color', 'white');
+        body.css('color', 'black');
 
     });
 
     $('#theme-by').click(function() {
         canvas.css('background-color', 'rgb(255,245,220)');
         canvas.css('color', 'black');
+        
+        body.css('background-color', 'rgb(255,245,220)');
+        body.css('color', 'black');
 
     });
 
@@ -87,7 +136,6 @@ function addMenuEvents()
     });
 
     $('#mode-first').click(function() {
-        $('.word').css('display', 'inline');
         $('.sentence').css('display', 'none');
         $('.sentence-1').css('display', 'inline');
         pageScroll();
@@ -151,6 +199,7 @@ function pageScroll() {
 
 window.onresize = function(event) {
     resizeDiv();
+    setCanvasHeight();
 };
 
 function resizeDiv()
