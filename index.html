@@ -1,128 +1,128 @@
 <!DOCTYPE html>
 <html class="ui-mobile">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Podium App</title>
-		
-		<link rel="stylesheet" href="//code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
-		<link rel="stylesheet" href="_css/style.css">
-		<link rel="stylesheet" href="_css/bootstrap.css">
-		
-		<link href='http://fonts.googleapis.com/css?family=Ropa+Sans' rel='stylesheet' type='text/css'>
-		
-		<script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
-		<script src="//code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
-		<script src="_js/dojo.js"></script>
-		<script src="_js/file-operations.js"></script>
-		
-		<script src="_js/script.js"></script>
-        <script src="_js/main-menu.js"></script>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Podium App</title>
+
+        <link rel="stylesheet" href="//code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css">
+        <link rel="stylesheet" href="_css/style.css">
+        <link rel="stylesheet" href="_css/bootstrap.css">
+
+        <link href='http://fonts.googleapis.com/css?family=Ropa+Sans' rel='stylesheet' type='text/css'>
+
+        <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script src="//code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+        <script src="_js/dojo.js"></script>
+        <script src="_js/file-operations.js"></script>
+
+        <script src="_js/script.js"></script>
+        <script src="_js/main-menu.js"></script>  
         <script src="_js/file-operations.js"></script>    
         <script src="_js/display-operations.js"></script>   
         <script src="_js/bootstrap.js"></script>
         <script src="_js/bootswatch.js"></script>
         <script src="_js/bsa.js"></script>
-		
-	</head>
-	<body>
-		<div data-role="page" class="ui-responsive-panel">
-			<div class="navbar navbar-default navbar-fixed-top">
-				<div class="container">
-					<div class="navbar-header">
-						<ul class="nav navbar-nav navbar-left">
-							<li>
-								<a class="nav-button" href="#nav-panel">
-									<img src="_images/menuicon.png" width="24" height="24"/> &nbsp;  Menu &nbsp; &nbsp;
-								</a>
-							</li>
-							<li>
-								<a class="nav-button" href="" onClick="newFile()">
-									New
-								</a>
-							</li>
-							<li>
-								<a class="nav-button" id="openfile" href="">
-									Open File
-								</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			
-			<div class="ui-panel-content-wrap ui-body-c ui-panel-animate ui-panel-content-wrap-closed">
-				<div data-role="content" id="page">
-					<div class="content-primary">
-						<div id="canvas">
-							<div id='text-canvas' contenteditable="true">
-					
-							</div>
-						</div>
-					</div>
-					<div class="content-secondary">
-						<div id="right-menu" class="menu">
-							<div id="slider">
-								20 <input id="speed-slider" type="range"
-										  min="0" max="20" step="1" value="0"
-										  onchange="updateSlider(this.value)" />
-								0
-							</div><br/>
-						</div>
-					</div>
-				</div>
-			</div>
 
-			<div data-role="panel" data-position="left" data-position-fixed="false" data-display="reveal" id="nav-panel" data-theme="a">
+    </head>
+    <body>
+        <div data-role="page" class="ui-responsive-panel">
+            <div class="navbar navbar-default navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li>
+                                <a class="nav-button" href="#nav-panel">
+                                    <img src="_images/menuicon.png" width="24" height="24"/> &nbsp;  Menu &nbsp; &nbsp;
+                                </a>
+                            </li>
+                            <li>
+                                <a class="nav-button" href="" onClick="newFile()">
+                                    New
+                                </a>
+                            </li>
+                            <li>
+                                <a class="nav-button" id="openfile" href="">
+                                    Open File
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-				<ul data-role="listview" data-theme="a" data-divider-theme="a" style="margin-top:-16px; class="nav-search">
-					<li data-icon="delete" style="background-color:#111;">
-						<a href="#" data-rel="close">Close menu</a>
-					</li>
-					<li id="serif" data-filtertext="wai-aria voiceover accessibility screen reader">
-						<a href="">Serif</a>
-					</li>
-					<li id="sans-serif" data-filtertext="accordions collapsible set collapsible-set collapsed">
-						<a href="">Sans Serif</a>
-					</li>
-					<li id="bigger-text" data-filtertext="ajax navigation model">
-						<a href="">A+</a>
-					</li>
-					<li id="smaller-text" data-filtertext="ajax navigation model">
-						<a href="">A-</a>
-					</li>
-					<li id="compact" data-filtertext="ajax navigation model">
-						<a href="">Compact</a>
-					</li>
-					<li id="normal" data-filtertext="ajax navigation model">
-						<a href="">Normal</a>
-					</li>
-					<li id="stretch" data-filtertext="ajax navigation model">
-						<a href="">Stretch</a>
-					</li>
-					<li id="theme-wb" data-filtertext="ajax navigation model">
-						<a href="">W/B</a>
-					</li>
-					<li id="theme-bw" data-filtertext="ajax navigation model">
-						<a href="">B/W</a>
-					</li>
-					<li id="theme-by" data-filtertext="ajax navigation model">
-						<a href="">B/Y</a>
-					</li>
-					<li id="mode-full" data-filtertext="ajax navigation model">
-						<a href="">Full Text</a>
-					</li>
-					<li id="mode-first" data-filtertext="ajax navigation model">
-						<a href="">First sentence</a>
-					</li>
-					<li id="mode-outline" data-filtertext="ajax navigation model">
-						<a href="">Outline</a>
-					</li>
-				</ul>
-			</div>
-			
-		</div><!-- /page -->
-		
-		<input type="file" id="open-file" onChange='openFile()'/>
-	</body>
+            <div class="ui-panel-content-wrap ui-body-c ui-panel-animate ui-panel-content-wrap-closed">
+                <div data-role="content" id="page">
+                    <div class="content-primary">
+                        <div id="canvas">
+                            <div id='text-canvas' contenteditable="true">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-secondary">
+                        <div id="right-menu" class="menu">
+                            <div id="slider">
+                                20 <input id="speed-slider" type="range"
+                                          min="0" max="20" step="1" value="0"
+                                          onchange="updateSlider(this.value)" />
+                                0
+                            </div><br/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div data-role="panel" data-position="left" data-position-fixed="false" data-display="reveal" id="nav-panel" data-theme="a">
+
+                <ul data-role="listview" data-theme="a" data-divider-theme="a" style="margin-top:-16px; class="nav-search">
+                    <li data-icon="delete" style="background-color:#111;">
+                        <a href="#" data-rel="close">Close menu</a>
+                    </li>
+                    <li id="serif" data-filtertext="wai-aria voiceover accessibility screen reader">
+                        <a href="">Serif</a>
+                    </li>
+                    <li id="sans-serif" data-filtertext="accordions collapsible set collapsible-set collapsed">
+                        <a href="">Sans Serif</a>
+                    </li>
+                    <li id="bigger-text" data-filtertext="ajax navigation model">
+                        <a href="">A+</a>
+                    </li>
+                    <li id="smaller-text" data-filtertext="ajax navigation model">
+                        <a href="">A-</a>
+                    </li>
+                    <li id="compact" data-filtertext="ajax navigation model">
+                        <a href="">Compact</a>
+                    </li>
+                    <li id="normal" data-filtertext="ajax navigation model">
+                        <a href="">Normal</a>
+                    </li>
+                    <li id="stretch" data-filtertext="ajax navigation model">
+                        <a href="">Stretch</a>
+                    </li>
+                    <li id="theme-wb" data-filtertext="ajax navigation model">
+                        <a href="">W/B</a>
+                    </li>
+                    <li id="theme-bw" data-filtertext="ajax navigation model">
+                        <a href="">B/W</a>
+                    </li>
+                    <li id="theme-by" data-filtertext="ajax navigation model">
+                        <a href="">B/Y</a>
+                    </li>
+                    <li id="mode-full" data-filtertext="ajax navigation model">
+                        <a href="">Full Text</a>
+                    </li>
+                    <li id="mode-first" data-filtertext="ajax navigation model">
+                        <a href="">First sentence</a>
+                    </li>
+                    <li id="mode-outline" data-filtertext="ajax navigation model">
+                        <a href="">Outline</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div><!-- /page -->
+
+        <input type="file" id="open-file" onChange='openFile()'/>
+    </body>
 </html>

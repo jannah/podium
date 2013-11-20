@@ -7,10 +7,8 @@ var canvas;
 var body;
 var slider;
 var navpanel;
-
 var btnOpenFile;
 var inpOpenFile;
-
 var fontSize = 1;
 var speed = 0;
 var minSpeed = 50;
@@ -19,51 +17,38 @@ $(document).ready(function() {
 
     init();
 });
-
-
 function init()
 {
     resizeDiv();
-    
     canvas = $('#text-canvas');
     body = $('#page');
     slider = $('#right-menu');
     navpanel = $('#nav-panel');
-    
     btnOpenFile = $('#openfile');
     inpOpenFile = $('#open-file');
-    
     inpOpenFile.css('opacity', 0);
-    inpOpenFile.css('filter','alpha(opacity = 0');
+    inpOpenFile.css('filter', 'alpha(opacity = 0');
     inpOpenFile.hide();
-    
     btnOpenFile.click(function() {
-    	inpOpenFile.trigger('click');
-    	return false;
+        inpOpenFile.trigger('click');
+        return false;
     });
-    
     addMenuEvents();
     setCanvasHeight();
-<<<<<<< HEAD
     updateProgressBar();
-    
-=======
->>>>>>> be42b4e753389a0d7f13b4149d2eb98ee99a7052
 }
 
 function setCanvasHeight()
 {
-	var elem = (document.compatMode === "CSS1Compat") ? 
-    document.documentElement :
-    document.body;
-
-	var height = elem.clientHeight - 53;
-	var width = elem.clientWidth;
-	
-	canvas.css('height', (height - 50));
-	slider.css('height', (height));
-	body.css('height', height);
-	navpanel.css('height', height);
+    var elem = (document.compatMode === "CSS1Compat") ?
+            document.documentElement :
+            document.body;
+    var height = elem.clientHeight - 53;
+    var width = elem.clientWidth;
+    canvas.css('height', (height - 50));
+    slider.css('height', (height));
+    body.css('height', height);
+    navpanel.css('height', height);
 }
 
 function addMenuEvents()
@@ -95,30 +80,21 @@ function addMenuEvents()
     $('#theme-bw').click(function() {
         canvas.css('background-color', 'black');
         canvas.css('color', 'white');
-        
         body.css('background-color', 'black');
         body.css('color', 'white');
-
     });
     $('#theme-wb').click(function() {
         canvas.css('background-color', 'white');
         canvas.css('color', 'black');
-        
         body.css('background-color', 'white');
         body.css('color', 'black');
-
     });
-
     $('#theme-by').click(function() {
         canvas.css('background-color', 'rgb(255,245,220)');
         canvas.css('color', 'black');
-        
         body.css('background-color', 'rgb(255,245,220)');
         body.css('color', 'black');
-
     });
-
-
     $('#compact').click(function() {
         $('.paragraph').css('line-height', '1');
         pageScroll();
@@ -131,22 +107,15 @@ function addMenuEvents()
         $('.paragraph').css('line-height', '2');
         pageScroll();
     });
-
     $('#mode-full').click(function() {
         $('.sentence').css('display', 'inline');
-<<<<<<< HEAD
         $('.word').css('display', 'inline');
         pageScroll();
-=======
->>>>>>> be42b4e753389a0d7f13b4149d2eb98ee99a7052
     });
-
     $('#mode-first').click(function() {
         $('.sentence').css('display', 'none');
         $('.sentence-1').css('display', 'inline');
-<<<<<<< HEAD
         pageScroll();
-
     });
     $('#mode-keyword').click(function() {
         $('.sentence').css('display', 'inline');
@@ -154,16 +123,10 @@ function addMenuEvents()
         $('.highlighted-word').css('display', 'inline');
         pageScroll();
     });
-=======
-
-    });
-
->>>>>>> be42b4e753389a0d7f13b4149d2eb98ee99a7052
 
     canvas.scroll(function()
     {
         var progress = updateProgressBar();
-
         /*  console.log("Scroll Top=" + canvas.scrollTop()
          + "\tScroll Height=" + canvas.get(0).scrollHeight
          + "\tRemaining Scroll =" + (canvas.get(0).scrollHeight - canvas.scrollTop())
@@ -173,20 +136,16 @@ function addMenuEvents()
         {
             canvas.stop();
         }
-        
+
 
     });
-
-
 }
 
 function updateSlider(value) {
     console.log(value);
-
     value = parseInt(value);
     speed = (value === 0) ? 0 : minSpeed + value * 10;
     pageScroll();
-
 }
 function pageScroll() {
 
@@ -194,17 +153,13 @@ function pageScroll() {
         canvas.stop();
     else {
         var text = grabText();
-
         var wordCount = getWordCount(text);
         var duration = wordCount / speed;
         var remainingDuration = duration * 60 * 100 * (1 - getProgress());
-
         console.log(speed + "wpm\t" + remainingDuration + "ms");
-
         canvas.stop().animate({
             scrollTop: canvas.get(0).scrollHeight + 'px'
         }, remainingDuration);
-
     }
 }
 
@@ -213,7 +168,6 @@ window.onresize = function(event) {
     resizeDiv();
     setCanvasHeight();
 };
-
 function resizeDiv()
 {
     var vpw = $(window).width();
@@ -251,7 +205,6 @@ function grabText()
     var text = canvas.text();
 //    console.log(text);
     return text;
-<<<<<<< HEAD
 }
 
 
@@ -272,14 +225,9 @@ function addWordEvents()
 function updateProgressBar()
 {
     var progress = Math.ceil(getProgress() * 100) + '%';
-
     var bar = $('#progress-bar');
     bar.css('width', progress);
     bar.text(progress);
-
     return progress;
+}
 
-}
-=======
-}
->>>>>>> be42b4e753389a0d7f13b4149d2eb98ee99a7052
