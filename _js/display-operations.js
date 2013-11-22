@@ -15,9 +15,9 @@ var minSpeed = 50;
 var maxSpeed = 250;
 $(document).ready(function() {
 
-    init();
+    initDisplay();
 });
-function init()
+function initDisplay()
 {
     resizeDiv();
     canvas = $('#text-canvas');
