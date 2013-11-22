@@ -165,6 +165,7 @@ function processText(text)
 //    console.log(output);
 
     $('#text-canvas').empty().append(output);
+    addWordEvents();
 
 }
 function reloadText()

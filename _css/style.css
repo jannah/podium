@@ -191,7 +191,9 @@ input[type='range']::-webkit-slider-thumb {
 .sentence-1{
     font-style:italic;
 }
-
+.highlighted-word{
+    font-weight: bold;
+}
 #progress-area{
     position:absolute;
     z-index:100;
