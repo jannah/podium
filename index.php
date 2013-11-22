@@ -27,6 +27,7 @@
         <script src="_js/main-menu.js"></script>  
         <script src="_js/file-operations.js"></script>    
         <script src="_js/display-operations.js"></script>   
+        <script src="_js/user_input.js"></script>
         <script src="_js/bootstrap.js"></script>
         <script src="_js/bootswatch.js"></script>
         <script src="_js/bsa.js"></script>
@@ -42,31 +43,6 @@
 		?>
 		
         <div data-role="page" class="ui-responsive-panel">
-        	<!--
-            <div class="navbar navbar-default navbar-fixed-top">
-                <div class="container">
-                    <div class="navbar-header">
-                        <ul class="nav navbar-nav navbar-left">
-                            <li>
-                                <a class="nav-button" href="#nav-panel">
-                                    <img src="_images/menuicon.png" width="24" height="24"/> &nbsp;  Menu &nbsp; &nbsp;
-                                </a>
-                            </li>
-                            <li>
-                                <a class="nav-button" href="" onClick="newFile()">
-                                    New
-                                </a>
-                            </li>
-                            <li>
-                                <a class="nav-button" id="openfile" href="">
-                                    Open File
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            -->
 			<div data-role="header" data-position="fixed">
 				<a href="#nav-panel" data-role="button" data-mini="true">Menu</a>
 				<h1>Podium</h1>
@@ -77,6 +53,10 @@
 						<li><a id="openfile" href="" data-role="button" data-mini="true">Open File</a></li>
 					</ul>
 				</div>
+			</div>
+			
+			<div data-role="popup" id="inputForm">
+				<p>This is a completely basic popup, no options set.<p>
 			</div>
 			
 			<div data-role="content" id="page">
