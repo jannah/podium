@@ -38,17 +38,18 @@ root {
 
 #page
 {
-	margin-top: 53px;
 	overflow: hidden;
+	margin-left: 0px;
+	padding-left: 0px;
 }
 
 .content-primary {
-	width: 90%;
+	width: 94%;
 	float: left;
 }
 
 .content-secondary {
-	width: 10%;
+	width: 6%;
 	float: left;
 	height: 100%;
 }
@@ -56,9 +57,9 @@ root {
 #canvas
 {
     /* display:inline-block; */
-    width: 90.5%;
+    width: 100%;
     height: 100%;
-    margin: 0 0 0 5.5%;
+    margin: 0px !important;
 }
 
 #left-menu
@@ -167,6 +168,13 @@ input[type='range']::-webkit-slider-thumb {
 
 }
 
+.first-paragraph{
+    padding-top: 20%;
+}
+
+.last-paragraph{
+    padding-bottom: 20%;
+}
 .paragraph-label{
     /* height: 100%; */
     /* float:left; */
