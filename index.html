@@ -48,11 +48,46 @@
 				</div>
 			</div>
 			
-			<div data-role="popup" id="inputForm">
-				<p>This is a completely basic popup, no options set.<p>
-			</div>
-			
 			<div data-role="content" id="page">
+				
+				<div data-role="popup" id="myPopup" data-history="false" data-dismissible="false" data-theme="a" class="ui-corner-all ui-popup ui-body-a ui-overlay-shadow">
+					<form>
+						<div style="padding:10px 20px;">
+							<h3>Please fill in the form</h3>
+							
+							<label for="ag" class="ui-hidden-accessible ui-input-text">Age</label>
+							<input type="text" name="age" id="ag" value="" placeholder="age" data-theme="a" class="ui-input-text ui-body-a">
+							
+							<label for="gen" class="ui-hidden-accessible ui-input-text">Gender:</label>
+							<input type="text" name="gender" id="gen" value="" placeholder="gender" data-theme="a" class="ui-input-text ui-body-a">
+
+							<label for="loc" class="ui-hidden-accessible ui-input-text">Location:</label>
+							<input type="text" name="location" id="loc" value="" placeholder="location" data-theme="a" class="ui-input-text ui-body-a">
+							
+							<label for="edu" class="ui-hidden-accessible ui-input-text">Education:</label>
+							<input type="text" name="education" id="edu" value="" placeholder="education" data-theme="a" class="ui-input-text ui-body-a">
+							
+							<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-inline ui-btn-up-c">
+								<span class="ui-btn-inner">
+									<span class="ui-btn-text">Cancel</span>
+								</span>
+							</a>
+							
+							<a id="sendForm" href="#" data-role="button" data-inline="true" data-rel="back" data-theme="b" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-inline ui-btn-up-b">
+								<span class="ui-btn-inner">
+									<span class="ui-btn-text">&nbsp;Send&nbsp;</span>
+								</span>
+							</a>
+						</div>
+					</form>
+				</div>
+				
+				<script type="text/javascript" language="JavaScript">
+					$(":jqmData(role='page'):last").on("pageshow", function(event) {
+						$("#myPopup", $(this)).popup("open");
+					});
+				</script>
+				
 				<div class="content-primary">
 					<div id="canvas">
 						<div id='text-canvas' contenteditable="true">
@@ -62,12 +97,21 @@
 				</div>
 				<div class="content-secondary">
 					<div id="right-menu" class="menu">
+					
+						<div role="application" class="ui-slider-vertical ui-btn-down-c ui-btn-corner-all">
+							<a href="#" class="ui-slider-handle-vertical ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0" title="0" aria-labelledby="undefined-label" style="top: 0%;">
+								<span class="ui-btn-inner ui-btn-corner-all">
+									<span class="ui-btn-text"></span>
+								</span>
+							</a>
+						</div>
+						<!--					
 						<div id="slider">
 							20 <input id="speed-slider" type="range"
 									  min="0" max="20" step="1" value="0"
 									  onchange="updateSlider(this.value)" />
 							0
-						</div><br/>
+						</div><br/>-->
 					</div>
 				</div>
 			</div>
