@@ -143,6 +143,40 @@ root {
     background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0, #fefefe), color-stop(0.49, #dddddd), color-stop(0.51, #d1d1d1), color-stop(1, #a1a1a1) );
 }
 
+label.ui-slider-vertical { 
+	display: block; 
+}
+
+div.ui-slider-vertical, div.ui-slider-verticalInverted { 
+	position: relative; 
+	display: inline-block; 
+	overflow: visible; 
+	height: 250px; 
+	padding: 0; 
+	margin: 0 2% 0 20px; 
+	top: 4px; 
+	width:15px; 
+}
+
+label.ui-slider-vertical, label.ui-slider-verticalInverted { 
+	display: inline-block;  
+	width: 20%;  
+	margin: 0 2% 0 0;
+}
+
+div.ui-slider-vertical, div.ui-slider-verticalInverted { 
+	width: 15px; 
+}
+
+a.ui-slider-handle-vertical, a.ui-slider-handle-verticalInverted { 
+	position: absolute; 
+	z-index: 100;  
+	top: 50%; 
+	width: 28px; 
+	height: 28px; 
+	margin-top: 0px; 
+	margin-left: -8px; 
+}
 
 input[type='range']::-webkit-slider-thumb {  
     -webkit-appearance: none;  
