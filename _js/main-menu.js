@@ -14,11 +14,11 @@ function openFile()
 {
     console.log('openning-file');
     var fileSelector = $('#open-file');
-    console.log(fileSelector);
+//    console.log(fileSelector);
     var file = fileSelector.get(0).files[0];
-  
-    console.log(file);
-  	processFile(file);
+
+//    console.log(file);
+    processFile(file);
 }
 
 function importFile()
