@@ -10,7 +10,7 @@ $(document).ready(function() {
 //var file;
 function initFileOps()
 {
-    addTextEditEvent();
+//    addTextEditEvent();
 }
 /**
  * 
@@ -30,7 +30,7 @@ function processFile(file)
              break;
              */
     }
-    addTextEditEvent();
+
 }
 function readFileAsText(file)
 {
@@ -101,7 +101,7 @@ function cleanParagraph(para, paraIndex)
     {
         var sout = "";
         var sentence = sentences[i] + '.';
-        console.log(sentence);
+//        console.log(sentence);
         if ($.inArray(sentence, ignoreArray) !== -1)
         {
             continue;
@@ -128,7 +128,7 @@ function cleanParagraph(para, paraIndex)
     }
 
 //    console.log(output);
-    output = output.replace('<p></p>', '');
+    output = output.replace('\n', '');
     return output;
 }
 
@@ -152,59 +152,101 @@ function processText(text)
 
         para = cleanParagraph(para, i);
         var out = "<div id='paragraph-div-" + i + "' class='paragraph-div"
-                + ((i === 0) ? " first-paragraph" : "")
-                + ((i === (j - 1)) ? " last-paragraph" : "")
+//                + ((i === 0) ? " first-paragraph" : "")
+//                + ((i === (j - 1)) ? " last-paragraph" : "")
                 + "'>"
                 + "<div class='paragraph-label'>" + i + "</div>"
                 + "<div id='paragraph-" + i + "' class='paragraph' contenteditable='true'>"
-                + "<p>" + para + "<p></div>"
+                + "<p>" + para + "</p></div>"
                 + "<div id='paragraph-time-" + i + "' class='paragraph-time'></div></div>";
         output += out;
     }
 
 //    console.log(output);
 
+
     $('#text-canvas').empty().append(output);
+    $('.paragraph-div').first().addClass('first-paragraph');
+    $('.paragraph-div').last().addClass('last-paragraph');
+    addWordEvents();
+    addTextEditEvent();
 
 }
 function reloadText()
 {
-     var paragraphs = $('.paragraph');
+    var paragraphs = $('.paragraph');
 
-        console.log(paragraphs);
-        var out = "";
-        for (var i =0, j= paragraphs.length;i<j;i++)
-        {
-            var para = $(paragraphs[i]);
-            console.log(para.html());
-            out += para.text()+"\n";
-        }
+    console.log(paragraphs);
+    var out = "";
+    for (var i = 0, j = paragraphs.length; i < j; i++)
+    {
+        var para = $(paragraphs[i]);
+        console.log(para.html());
+        out += para.text() + "\n";
+    }
 //        var text = );
-        console.log(out);
-        processText(out);
+    console.log(out);
+    processText(out);
 }
 function addTextEditEvent()
 {
-    /*
-    $('#text-canvas').unbind('input');
-    $('#text-canvas').on('input', function()
+    var paras = $('.paragraph');
+    console.log('Adding edit event');
+    console.log(paras);
+    for (var i = 0, j = paras.length; i < j; i++)
     {
-        console.log('text changed');
-        var self = $(this);
-        var paragraphs = $('.paragraph');
+        var para = $(paras[i]);
+        var id = para.attr('id');
+        console.log(para);
+        para.attr('contenteditable', true);
+//        para.unbind('input');
+        para.on('click', function() {
+            console.log('para clicked=' + para.attr('id'));
+        });
 
-        console.log(paragraphs);
-        var out = "";
-        for (var i =0, j= paragraphs.length;i<j;i++)
+        $('#' + id).bind('input', function()
         {
-            var para = $(paragraphs[i]);
-            console.log(para.text());
-            out += para.text()+"\n";
-        }
-//        var text = );
-        console.log(out);
-        processText(out);
 
-    });
-    */
+            var self = $(this);
+            console.log('text changed: ' + self.attr('id'));
+            console.log(self.text());
+            console.log(self.html());
+            /*var paragraphs = $('.paragraph');
+             
+             console.log(paragraphs);
+             var out = "";
+             for (var i = 0, j = paragraphs.length; i < j; i++)
+             {
+             var para = $(paragraphs[i]);
+             console.log(para.text());
+             out += para.text() + "\n";
+             }
+             //        var text = );
+             console.log(out);
+             //            processText(out);
+             */
+        });
+    }
+    /*
+     $('#text-canvas').unbind('input');
+     $('#text-canvas').on('input', function()
+     {
+     console.log('text changed');
+     var self = $(this);
+     var paragraphs = $('.paragraph');
+     
+     console.log(paragraphs);
+     var out = "";
+     for (var i = 0, j = paragraphs.length; i < j; i++)
+     {
+     var para = $(paragraphs[i]);
+     console.log(para.text());
+     out += para.text() + "\n";
+     }
+     //        var text = );
+     console.log(out);
+     processText(out);
+     
+     });
+     */
 }

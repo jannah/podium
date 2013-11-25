@@ -13,6 +13,7 @@ var fontSize = 1;
 var speed = 0;
 var minSpeed = 50;
 var maxSpeed = 250;
+
 $(document).ready(function() {
 
     initDisplay();
@@ -199,6 +200,7 @@ function showMenuItems() {
 	$('#smaller-text').show();
 	$('#line-height').show();
 	$('#themes').show();
+	$('#text-mode').show();
 }
 
 function hideMenuItems() {
