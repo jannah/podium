@@ -200,6 +200,7 @@ function showMenuItems() {
 	$('#smaller-text').show();
 	$('#line-height').show();
 	$('#themes').show();
+	$('#text-mode').show();
 }
 
 function hideMenuItems() {
