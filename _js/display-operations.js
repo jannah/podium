@@ -24,7 +24,6 @@ function initDisplay()
     resizeDiv();
     canvas = $('#text-canvas');
     body = $('#page');
-    slider = $('#right-menu');
     navpanel = $('#nav-panel');
     
     btnNewFile = $('#newfile');
@@ -55,7 +54,6 @@ function setCanvasHeight()
     var height = elem.clientHeight - 78;
     var width = elem.clientWidth;
     canvas.css('height', (height - 50));
-    slider.css('height', (height));
     body.css('height', height);
     navpanel.css('height', height);
 }
@@ -65,6 +63,8 @@ function addMenuEvents()
 	$('#back').click(function() {
 		showMenuItems();
 		hideMenuItems();
+		
+		saveAction("back");
 	});
 	
 	$('#fonts').click(function() {
