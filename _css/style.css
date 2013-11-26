@@ -116,6 +116,11 @@ root {
 }
 
 /* SLIDER */
+#speedSlider {
+    position: relative;
+    top:50%;
+    margin-left: 5px;
+}
 label.ui-slider-vertical { 
 	display: block; 
 }
@@ -131,7 +136,7 @@ div.ui-slider-vertical, div.ui-slider-verticalInverted {
 	overflow: visible;
 	height: 50%;
 	padding: 0;
-	margin: 0 2% 0 20px;
+	margin: 0 2% 0 40px;
 	top: 25%;
 	width:15px;
 }
