@@ -25,19 +25,13 @@
         <script src="_js/bootstrap.js"></script>
         <script src="_js/bootswatch.js"></script>
         <script src="_js/bsa.js"></script>
+        <script src="_js/verticalSlider.js"></script>
 
     </head>
     <body>
-    	<?php
-			// Import controller class
-			require('_includes/classes/class.controller.php');
-			
-			// Create instance of controller
-			$controller = new Controller();
-		?>
 		
         <div data-role="page" class="ui-responsive-panel">
-			<div data-role="header" data-position="fixed">
+			<div data-role="header" data-position="fixed" data-fullscreen="true">
 				<a href="#nav-panel" data-role="button" data-mini="true">Menu</a>
 				<h1>Podium</h1>
 				
@@ -99,21 +93,8 @@
 				<div class="content-secondary">
 					<div id="right-menu" class="menu">
 						
-						<div role="application" class="ui-slider-vertical ui-btn-down-c ui-btn-corner-all">
-							<a href="#" class="ui-slider-handle-vertical ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0" title="0" aria-labelledby="undefined-label" style="top: 0%;">
-								<span class="ui-btn-inner ui-btn-corner-all">
-									<span class="ui-btn-text"></span>
-								</span>
-							</a>
-						</div>
+						<input type="range" min="0" max="20" value="0" step="1" sliderOrientation="verticalInverted"  />
 						
-						<!--					
-						<div id="slider">
-							20 <input id="speed-slider" type="range"
-									  min="0" max="20" step="1" value="0"
-									  onchange="updateSlider(this.value)" />
-							0
-						</div><br/>-->
 					</div>
 				</div>
 			</div>
@@ -179,6 +160,10 @@
 					</li>
 				</ul>
             </div>
+            
+            <div data-role="footer" data-position="fixed" data-fullscreen="true">
+				<h1>Fixed footer!</h1>
+			</div>
 
         </div><!-- /page -->
 
