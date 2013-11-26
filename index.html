@@ -17,7 +17,8 @@
         <script src="_js/file-operations.js"></script>
 
         <script src="_js/script.js"></script>
-        <script src="_js/main-menu.js"></script>  
+        <script src="_js/main-menu.js"></script>
+        <script src="_js/present.js"></script>
         <script src="_js/file-operations.js"></script>    
         <script src="_js/display-operations.js"></script>   
         <script src="_js/time-operations.js"></script>   
@@ -31,6 +32,8 @@
     <body>
 		
         <div data-role="page" class="ui-responsive-panel">
+        	
+        	<!-- Full screen mode makes the toolbar disappear when the background is clicked -->
 			<div data-role="header" data-position="fixed" data-fullscreen="true">
 				<a href="#nav-panel" data-role="button" data-mini="true">Menu</a>
 				<h1>Podium</h1>
@@ -83,17 +86,18 @@
 					});
 				</script>
 				
-				<div class="content-primary">
+				<div class="content-primary" id="primaryContent">
 					<div id="canvas">
 						<div id='text-canvas'>
 
 						</div>
 					</div>
 				</div>
-				<div class="content-secondary">
+				
+				<div id="slide-panel" class="content-secondary" data-position="right">
 					<div id="right-menu" class="menu">
 						
-						<input type="range" min="0" max="20" value="0" step="1" sliderOrientation="verticalInverted"  />
+						<input id="speedSlider" type="range" min="0" max="20" value="10" step="1" sliderOrientation="verticalInverted"/>
 						
 					</div>
 				</div>
@@ -161,8 +165,9 @@
 				</ul>
             </div>
             
-            <div data-role="footer" data-position="fixed" data-fullscreen="true">
-				<h1>Fixed footer!</h1>
+            <div id="play-panel" data-role="footer" data-position="fixed" data-fullscreen="false">
+				<a id="btnPlay" href="" data-role="button" data-mini="true">Play</a>
+				<a id="btnPause" href="" data-role="button" data-mini="true">Pause</a>
 			</div>
 
         </div><!-- /page -->

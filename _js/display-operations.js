@@ -4,16 +4,22 @@
  * and open the template in the editor.
  */
 var canvas;
+var primaryContent;
 var body;
 var slider;
 var navpanel;
+var playpanel;
 var btnOpenFile;
 var inpOpenFile;
 var btnNewFile;
 var fontSize = 1;
+
+var speedSlider;
 var speed = 0;
 var minSpeed = 50;
 var maxSpeed = 250;
+
+var remainingDuration = 0;
 
 $(document).ready(function() {
 
@@ -22,28 +28,29 @@ $(document).ready(function() {
 function initDisplay()
 {
     resizeDiv();
+    
+    // Get all the divs! :D
     canvas = $('#text-canvas');
+    primaryContent = $('#primaryContent');
     body = $('#page');
     navpanel = $('#nav-panel');
-    
+    playpanel = $('#play-panel');
     btnNewFile = $('#newfile');
-    btnNewFile.click(function() {
-    	newFile();
-    });
-    
     btnOpenFile = $('#openfile');
     inpOpenFile = $('#open-file');
+    
     inpOpenFile.css('opacity', 0);
     inpOpenFile.css('filter', 'alpha(opacity = 0');
     inpOpenFile.hide();
-    btnOpenFile.click(function() {
-        inpOpenFile.trigger('click');
-        return false;
-    });
+    
+    speedSlider = $('#speedSlider');
+    
+    addBaseEvents();
     addMenuEvents();
     hideMenuItems();
     setCanvasHeight();
     updateProgressBar();
+    updateSlider();
 }
 
 function setCanvasHeight()
@@ -55,11 +62,34 @@ function setCanvasHeight()
     var width = elem.clientWidth;
     canvas.css('height', (height - 50));
     body.css('height', height);
+    primaryContent.css('height', height);
     navpanel.css('height', height);
+}
+
+function addBaseEvents() 
+{
+	primaryContent.click(function() {
+    	if($('#slide-panel').is(":visible")) {
+    		$('#slide-panel').hide();
+    	}
+    	else {
+    		$('#slide-panel').show();
+    	}
+    });
+    
+    btnNewFile.click(function() {
+    	newFile();
+    });
+    
+    btnOpenFile.click(function() {
+        inpOpenFile.trigger('click');
+        return false;
+    });
 }
 
 function addMenuEvents()
 {	
+
 	$('#back').click(function() {
 		showMenuItems();
 		hideMenuItems();
@@ -225,26 +255,58 @@ function hideMenuItems() {
 	$('#mode-outline').hide();
 }
 
-function updateSlider(value) {
-    console.log(value);
-    value = parseInt(value);
-    speed = (value === 0) ? 0 : minSpeed + value * 10;
-    pageScroll();
+function updateSlider() {
+    //console.log(value);
+    //value = parseInt(value);
+    //speed = (value === 0) ? 0 : minSpeed + value * 10;
+    //pageScroll();
+    
+    // Default speed value
+    var val = speedSlider.val();
+    speed = (val === 0) ? 0 : minSpeed + val * 10;
+    
+    console.log(speed);
+    
+    speedSlider.change(function()
+    { 
+        var value = $(this).val();
+        speed = (value === 0) ? 0 : minSpeed + value * 10;
+        
+        pageScroll();
+    });
 }
+
 function pageScroll() {
 
     if (speed === 1)
         canvas.stop();
     else {
-        var text = grabText();
-        var wordCount = getWordCount(text);
-        var duration = wordCount / speed;
-        var remainingDuration = duration * 60 * 100 * (1 - getProgress());
+        updateSpeed();
+        
         console.log(speed + "wpm\t" + remainingDuration + "ms");
-        canvas.stop().animate({
-            scrollTop: canvas.get(0).scrollHeight + 'px'
-        }, remainingDuration);
+        
+        if(playing == true) {
+        
+			canvas.stop().animate({
+				scrollTop: canvas.get(0).scrollHeight + 'px'
+			}, remainingDuration);
+		}
+		else {
+			canvas.stop();
+		}
     }
+}
+
+function updateSpeed() {
+	var text = grabText();
+	var wordCount = getWordCount(text);
+	var duration = wordCount / speed;
+	
+	console.log("Speed: " + speed);
+    console.log("Duration: " + duration);
+    console.log("Progress: " + getProgress());
+	
+	remainingDuration = duration * 60 * 100 * (1 - getProgress());
 }
 
 
