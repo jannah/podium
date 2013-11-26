@@ -289,7 +289,7 @@ function pageScroll() {
         
 			canvas.stop().animate({
 				scrollTop: canvas.get(0).scrollHeight + 'px'
-			}, remainingDuration);
+			}, remainingDuration, "linear");
 		}
 		else {
 			canvas.stop();
