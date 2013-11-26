@@ -9,6 +9,7 @@ var slider;
 var navpanel;
 var btnOpenFile;
 var inpOpenFile;
+var btnNewFile;
 var fontSize = 1;
 var speed = 0;
 var minSpeed = 50;
@@ -25,6 +26,12 @@ function initDisplay()
     body = $('#page');
     slider = $('#right-menu');
     navpanel = $('#nav-panel');
+    
+    btnNewFile = $('#newfile');
+    btnNewFile.click(function() {
+    	newFile();
+    });
+    
     btnOpenFile = $('#openfile');
     inpOpenFile = $('#open-file');
     inpOpenFile.css('opacity', 0);

@@ -43,7 +43,7 @@
 				
 				<div data-role="navbar">
 					<ul>
-						<li><a href="" data-role="button" data-mini="true" onClick="newFile()">New</a></li>
+						<li><a id="newfile" href="" data-role="button" data-mini="true">New</a></li>
 						<li><a id="openfile" href="" data-role="button" data-mini="true">Open File</a></li>
 					</ul>
 				</div>
@@ -98,7 +98,7 @@
 				</div>
 				<div class="content-secondary">
 					<div id="right-menu" class="menu">
-					
+						
 						<div role="application" class="ui-slider-vertical ui-btn-down-c ui-btn-corner-all">
 							<a href="#" class="ui-slider-handle-vertical ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0" title="0" aria-labelledby="undefined-label" style="top: 0%;">
 								<span class="ui-btn-inner ui-btn-corner-all">
@@ -106,6 +106,7 @@
 								</span>
 							</a>
 						</div>
+						
 						<!--					
 						<div id="slider">
 							20 <input id="speed-slider" type="range"

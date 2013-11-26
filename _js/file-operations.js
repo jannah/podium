@@ -32,6 +32,18 @@ function processFile(file)
     }
 
 }
+
+function newFile() {
+	var out = "<div id='paragraph-div-0' class='paragraph-div first-paragraph"
+                + "'>"
+                + "<div class='paragraph-label'>0</div>"
+                + "<div id='paragraph-0' class='paragraph' contenteditable='true'>"
+                + "</div>"
+                + "<div id='paragraph-time-0' class='paragraph-time'></div></div>";
+    
+    $('#text-canvas').empty().append(out);
+}
+
 function readFileAsText(file)
 {
 
@@ -163,7 +175,6 @@ function processText(text)
     }
 
 //    console.log(output);
-
 
     $('#text-canvas').empty().append(output);
     $('.paragraph-div').first().addClass('first-paragraph');
