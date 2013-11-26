@@ -27,156 +27,158 @@
         <script src="_js/bootswatch.js"></script>
         <script src="_js/bsa.js"></script>
         <script src="_js/verticalSlider.js"></script>
+        <script src="_js/logging.js"></script>
+
 
     </head>
     <body>
-		
+
         <div data-role="page" class="ui-responsive-panel">
-        	
-        	<!-- Full screen mode makes the toolbar disappear when the background is clicked -->
-			<div data-role="header" data-position="fixed" data-fullscreen="true">
-				<a href="#nav-panel" data-role="button" data-mini="true">Menu</a>
-				<h1>Podium</h1>
-				
-				<div data-role="navbar">
-					<ul>
-						<li><a id="newfile" href="" data-role="button" data-mini="true">New</a></li>
-						<li><a id="openfile" href="" data-role="button" data-mini="true">Upload</a></li>
-						<li><a id="openrecent" href="" data-role="button" data-mini="true">Open Recent</a></li>
-					</ul>
-				</div>
-			</div>
-			
-			<div data-role="content" id="page">
-				
-				<div data-role="popup" id="myPopup" data-history="false" data-dismissible="false" data-theme="a" class="ui-corner-all ui-popup ui-body-a ui-overlay-shadow">
-					<form>
-						<div style="padding:10px 20px;">
-							<h3>Please fill in the form</h3>
-							
-							<label for="ag" class="ui-hidden-accessible ui-input-text">Age</label>
-							<input type="text" name="age" id="ag" value="" placeholder="age" data-theme="a" class="ui-input-text ui-body-a">
-							
-							<label for="gen" class="ui-hidden-accessible ui-input-text">Gender:</label>
-							<input type="text" name="gender" id="gen" value="" placeholder="gender" data-theme="a" class="ui-input-text ui-body-a">
 
-							<label for="loc" class="ui-hidden-accessible ui-input-text">Location:</label>
-							<input type="text" name="location" id="loc" value="" placeholder="location" data-theme="a" class="ui-input-text ui-body-a">
-							
-							<label for="edu" class="ui-hidden-accessible ui-input-text">Education:</label>
-							<input type="text" name="education" id="edu" value="" placeholder="education" data-theme="a" class="ui-input-text ui-body-a">
-							
-							<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-inline ui-btn-up-c">
-								<span class="ui-btn-inner">
-									<span class="ui-btn-text">Cancel</span>
-								</span>
-							</a>
-							
-							<a id="sendForm" href="#" data-role="button" data-inline="true" data-rel="back" data-theme="b" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-inline ui-btn-up-b">
-								<span class="ui-btn-inner">
-									<span class="ui-btn-text">&nbsp;Send&nbsp;</span>
-								</span>
-							</a>
-						</div>
-					</form>
-				</div>
-				
-				<script type="text/javascript" language="JavaScript">
-					$(":jqmData(role='page'):last").on("pageshow", function(event) {
-						$("#myPopup", $(this)).popup("open");
-					});
-				</script>
-				
-				<div class="content-primary" id="primaryContent">
-					<div id="canvas">
-						<div id='text-canvas'>
+            <!-- Full screen mode makes the toolbar disappear when the background is clicked -->
+            <div data-role="header" data-position="fixed" data-fullscreen="true">
+                <a href="#nav-panel" data-role="button" data-mini="true">Menu</a>
+                <h1>Podium</h1>
 
-						</div>
-					</div>
-				</div>
-				
-				<div id="slide-panel" class="content-secondary" data-position="right">
-					<div id="right-menu" class="menu">
-						
-						<input id="speedSlider" type="range" min="0" max="20" value="10" step="1" sliderOrientation="verticalInverted"/>
-					</div>
-				</div>
-			</div>
+                <div data-role="navbar">
+                    <ul>
+                        <li><a id="newfile" href="" data-role="button" data-mini="true">New</a></li>
+                        <li><a id="openfile" href="" data-role="button" data-mini="true">Upload</a></li>
+                        <li><a id="openrecent" href="" data-role="button" data-mini="true">Open Recent</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div data-role="content" id="page">
+
+                <div data-role="popup" id="myPopup" data-history="false" data-dismissible="false" data-theme="a" class="ui-corner-all ui-popup ui-body-a ui-overlay-shadow">
+                    <form>
+                        <div style="padding:10px 20px;">
+                            <h3>Please fill in the form</h3>
+
+                            <label for="ag" class="ui-hidden-accessible ui-input-text">Age</label>
+                            <input type="text" name="age" id="ag" value="" placeholder="age" data-theme="a" class="ui-input-text ui-body-a">
+
+                            <label for="gen" class="ui-hidden-accessible ui-input-text">Gender:</label>
+                            <input type="text" name="gender" id="gen" value="" placeholder="gender" data-theme="a" class="ui-input-text ui-body-a">
+
+                            <label for="loc" class="ui-hidden-accessible ui-input-text">Location:</label>
+                            <input type="text" name="location" id="loc" value="" placeholder="location" data-theme="a" class="ui-input-text ui-body-a">
+
+                            <label for="edu" class="ui-hidden-accessible ui-input-text">Education:</label>
+                            <input type="text" name="education" id="edu" value="" placeholder="education" data-theme="a" class="ui-input-text ui-body-a">
+
+                            <a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-inline ui-btn-up-c">
+                                <span class="ui-btn-inner">
+                                    <span class="ui-btn-text">Cancel</span>
+                                </span>
+                            </a>
+
+                            <a id="sendForm" href="#" data-role="button" data-inline="true" data-rel="back" data-theme="b" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-inline ui-btn-up-b">
+                                <span class="ui-btn-inner">
+                                    <span class="ui-btn-text">&nbsp;Send&nbsp;</span>
+                                </span>
+                            </a>
+                        </div>
+                    </form>
+                </div>
+
+                <script type="text/javascript" language="JavaScript">
+                    $(":jqmData(role='page'):last").on("pageshow", function(event) {
+                        $("#myPopup", $(this)).popup("open");
+                    });
+                </script>
+
+                <div class="content-primary" id="primaryContent">
+                    <div id="canvas">
+                        <div id='text-canvas'>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div id="slide-panel" class="content-secondary" data-position="right">
+                    <div id="right-menu" class="menu">
+
+                        <input id="speedSlider" type="range" min="0" max="20" value="10" step="1" sliderOrientation="verticalInverted"/>
+                    </div>
+                </div>
+            </div>
 
             <div data-role="panel" data-position="left" data-position-fixed="false" data-display="reveal" id="nav-panel" data-theme="a">
-				<ul data-role="listview" data-theme="a" data-divider-theme="a" style="margin-top:-16px; class="nav-search">
-					<li data-icon="delete" style="background-color:#111;">
-						<a href="#" data-rel="close">Close menu</a>
-					</li>
-					<li id="back">
-						<a href="">Back</a>
-					</li>
-					<li id="fonts">
-						<a href="">Fonts</a>
-					</li>
-					<li id="serif">
-						<a href="">Serif</a>
-					</li>
-					<li id="sans-serif">
-						<a href="">Sans Serif</a>
-					</li>
-					<li id="bigger-text">
-						<a href="">A+</a>
-					</li>
-					<li id="smaller-text">
-						<a href="">A-</a>
-					</li>
-					<li id="line-height">
-						<a href="">Line height</a>
-					</li>
-					<li id="compact">
-						<a href="">Compact</a>
-					</li>
-					<li id="normal">
-						<a href="">Normal</a>
-					</li>
-					<li id="stretch">
-						<a href="">Stretch</a>
-					</li>
-					<li id="themes">
-						<a href="">Themes</a>
-					</li>
-					<li id="theme-wb">
-						<a href="">W/B</a>
-					</li>
-					<li id="theme-bw">
-						<a href="">B/W</a>
-					</li>
-					<li id="theme-by">
-						<a href="">B/Y</a>
-					</li>
-					<li id="text-mode">
-						<a href="">Text mode</a>
-					</li>
-					<li id="mode-full">
-						<a href="">Full Text</a>
-					</li>
-					<li id="mode-first">
-						<a href="">First sentence</a>
-					</li>
-					<li id="mode-outline">
-						<a href="">Outline</a>
-					</li>
-				</ul>
+                <ul data-role="listview" data-theme="a" data-divider-theme="a" style="margin-top:-16px; class="nav-search">
+                    <li data-icon="delete" style="background-color:#111;">
+                        <a href="#" data-rel="close">Close menu</a>
+                    </li>
+                    <li id="back">
+                        <a href="">Back</a>
+                    </li>
+                    <li id="fonts">
+                        <a href="">Fonts</a>
+                    </li>
+                    <li id="serif">
+                        <a href="">Serif</a>
+                    </li>
+                    <li id="sans-serif">
+                        <a href="">Sans Serif</a>
+                    </li>
+                    <li id="bigger-text">
+                        <a href="">A+</a>
+                    </li>
+                    <li id="smaller-text">
+                        <a href="">A-</a>
+                    </li>
+                    <li id="line-height">
+                        <a href="">Line height</a>
+                    </li>
+                    <li id="compact">
+                        <a href="">Compact</a>
+                    </li>
+                    <li id="normal">
+                        <a href="">Normal</a>
+                    </li>
+                    <li id="stretch">
+                        <a href="">Stretch</a>
+                    </li>
+                    <li id="themes">
+                        <a href="">Themes</a>
+                    </li>
+                    <li id="theme-wb">
+                        <a href="">W/B</a>
+                    </li>
+                    <li id="theme-bw">
+                        <a href="">B/W</a>
+                    </li>
+                    <li id="theme-by">
+                        <a href="">B/Y</a>
+                    </li>
+                    <li id="text-mode">
+                        <a href="">Text mode</a>
+                    </li>
+                    <li id="mode-full">
+                        <a href="">Full Text</a>
+                    </li>
+                    <li id="mode-first">
+                        <a href="">First sentence</a>
+                    </li>
+                    <li id="mode-outline">
+                        <a href="">Outline</a>
+                    </li>
+                </ul>
             </div>
-            
+
             <div id="play-panel" data-role="footer" data-position="fixed" data-fullscreen="false">
-				<a id="btnPlay" href="" data-role="button" data-mini="true">Play</a>
-				<a id="btnPause" href="" data-role="button" data-mini="true">Pause</a>
-				
-				<div id="progress-area">
-					<div id="progress-bar"></div>
-				</div>
-				
-				<div id="currentTime">00:00</div>
-				<div id="timeDivider">&nbsp;/&nbsp;</div>
-				<div id="totalTime">00:00</div>
-			</div>
+                <a id="btnPlay" href="" data-role="button" data-mini="true">Play</a>
+                <a id="btnPause" href="" data-role="button" data-mini="true">Pause</a>
+
+                <div id="progress-area">
+                    <div id="progress-bar"></div>
+                </div>
+
+                <div id="currentTime">00:00</div>
+                <div id="timeDivider">&nbsp;/&nbsp;</div>
+                <div id="totalTime">00:00</div>
+            </div>
 
         </div><!-- /page -->
 
