@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+fileOpened = false;
 
 function newFile() {
 	var out = "<div id='paragraph-div-0' class='paragraph-div first-paragraph"
@@ -14,6 +15,8 @@ function newFile() {
                 + "<div id='paragraph-time-0' class='paragraph-time'></div></div>";
     
     $('#text-canvas').empty().append(out);
+    
+    fileOpened = true;
 }
 
 function openFile()
@@ -25,6 +28,9 @@ function openFile()
 
 //    console.log(file);
     processFile(file);
+    
+    // Set opened file to true
+    fileOpened = true;
 }
 
 function importFile()

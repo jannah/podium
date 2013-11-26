@@ -13,9 +13,13 @@ var btnOpenFile;
 var inpOpenFile;
 var btnNewFile;
 var fontSize = 1;
+
+var speedSlider;
 var speed = 0;
 var minSpeed = 50;
 var maxSpeed = 250;
+
+var remainingDuration = 0;
 
 $(document).ready(function() {
 
@@ -39,11 +43,14 @@ function initDisplay()
     inpOpenFile.css('filter', 'alpha(opacity = 0');
     inpOpenFile.hide();
     
+    speedSlider = $('#speedSlider');
+    
     addBaseEvents();
     addMenuEvents();
     hideMenuItems();
     setCanvasHeight();
     updateProgressBar();
+    updateSlider();
 }
 
 function setCanvasHeight()
@@ -248,26 +255,58 @@ function hideMenuItems() {
 	$('#mode-outline').hide();
 }
 
-function updateSlider(value) {
-    console.log(value);
-    value = parseInt(value);
-    speed = (value === 0) ? 0 : minSpeed + value * 10;
-    pageScroll();
+function updateSlider() {
+    //console.log(value);
+    //value = parseInt(value);
+    //speed = (value === 0) ? 0 : minSpeed + value * 10;
+    //pageScroll();
+    
+    // Default speed value
+    var val = speedSlider.val();
+    speed = (val === 0) ? 0 : minSpeed + val * 10;
+    
+    console.log(speed);
+    
+    speedSlider.change(function()
+    { 
+        var value = $(this).val();
+        speed = (value === 0) ? 0 : minSpeed + value * 10;
+        
+        pageScroll();
+    });
 }
+
 function pageScroll() {
 
     if (speed === 1)
         canvas.stop();
     else {
-        var text = grabText();
-        var wordCount = getWordCount(text);
-        var duration = wordCount / speed;
-        var remainingDuration = duration * 60 * 100 * (1 - getProgress());
+        updateSpeed();
+        
         console.log(speed + "wpm\t" + remainingDuration + "ms");
-        canvas.stop().animate({
-            scrollTop: canvas.get(0).scrollHeight + 'px'
-        }, remainingDuration);
+        
+        if(playing == true) {
+        
+			canvas.stop().animate({
+				scrollTop: canvas.get(0).scrollHeight + 'px'
+			}, remainingDuration);
+		}
+		else {
+			canvas.stop();
+		}
     }
+}
+
+function updateSpeed() {
+	var text = grabText();
+	var wordCount = getWordCount(text);
+	var duration = wordCount / speed;
+	
+	console.log("Speed: " + speed);
+    console.log("Duration: " + duration);
+    console.log("Progress: " + getProgress());
+	
+	remainingDuration = duration * 60 * 100 * (1 - getProgress());
 }
 
 
