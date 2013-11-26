@@ -13,12 +13,15 @@ var btnOpenFile;
 var inpOpenFile;
 var btnNewFile;
 var fontSize = 1;
+var cntTime;
+var cntTotalTime;
 
 var speedSlider;
 var speed = 0;
 var minSpeed = 50;
 var maxSpeed = 250;
 
+var timeEstimate = 0;
 var remainingDuration = 0;
 
 $(document).ready(function() {
@@ -44,6 +47,8 @@ function initDisplay()
     inpOpenFile.hide();
     
     speedSlider = $('#speedSlider');
+    cntTime = $('#currentTime');
+    cntTotalTime = $('#totalTime');
     
     addBaseEvents();
     addMenuEvents();
@@ -256,11 +261,6 @@ function hideMenuItems() {
 }
 
 function updateSlider() {
-    //console.log(value);
-    //value = parseInt(value);
-    //speed = (value === 0) ? 0 : minSpeed + value * 10;
-    //pageScroll();
-    
     // Default speed value
     var val = speedSlider.val();
     speed = (val === 0) ? 0 : minSpeed + val * 10;
@@ -302,13 +302,35 @@ function updateSpeed() {
 	var wordCount = getWordCount(text);
 	var duration = wordCount / speed;
 	
-	console.log("Speed: " + speed);
-    console.log("Duration: " + duration);
-    console.log("Progress: " + getProgress());
-	
 	remainingDuration = duration * 60 * 100 * (1 - getProgress());
+	
+	var elapsed = (duration * 6) - (remainingDuration / 1000);
+	
+	if(wordCount != 1) {
+		cntTotalTime.text(calculateTime(duration * 6));
+		cntTime.text(calculateTime(elapsed));
+	}
 }
 
+function calculateTime(time) {
+	time = Math.round(time);
+	
+	var minutes = Math.floor(time / 60);
+	
+	if(minutes < 10) {
+		minutes = "0" + minutes;
+	}
+	
+	var seconds = time % 60;
+	
+	if(seconds < 10) {
+		seconds = "0" + seconds;
+	}
+	
+	var timeString = minutes + ":" + seconds;
+	
+	return timeString;
+}
 
 window.onresize = function(event) {
     resizeDiv();
@@ -334,7 +356,12 @@ function getProgress()
     var canvasH = parseInt(canvas.css('height'));
     var currentScroll = parseInt(canvas.scrollTop());
     var scrollH = canvas.get(0).scrollHeight;
-    var progress = currentScroll / (scrollH - canvasH);
+    var progress = 0;
+    
+    if(currentScroll != 0) {
+    	var progress = currentScroll / (scrollH - canvasH);	
+    }
+    
     return progress;
 }
 
@@ -374,6 +401,9 @@ function updateProgressBar()
     var bar = $('#progress-bar');
     bar.css('width', progress);
     bar.text(progress);
+    
+    updateSpeed();
+    
     return progress;
 }
 

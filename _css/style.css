@@ -226,13 +226,29 @@ a.ui-slider-handle-vertical, a.ui-slider-handle-verticalInverted {
 .highlighted-word{
     font-weight: bold;
 }
-#progress-area{
-    position:absolute;
-    z-index:100;
-    top: calc( 100% - 20px);
-    width: 100%;
+
+#btnPlay, #btnPause {
+	float: left;
 }
+
+#progress-area{
+    margin: 6px;
+    width: 85%;
+    float: left;
+    background-color: #454545;
+    height: 22px;
+}
+
 #progress-bar{
     background-color: green;
-    height:20px;
+    height:22px;
+    padding-top: 1px;
+    padding-bottom: 2px;
+}
+
+#currentTime, #totalTime, #timeDivider {
+	height: 22px;
+	color: #fff;
+	margin-top: 6px;
+	float: left;
 }
