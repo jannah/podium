@@ -4,9 +4,11 @@
  * and open the template in the editor.
  */
 var canvas;
+var primaryContent;
 var body;
 var slider;
 var navpanel;
+var playpanel;
 var btnOpenFile;
 var inpOpenFile;
 var btnNewFile;
@@ -22,24 +24,22 @@ $(document).ready(function() {
 function initDisplay()
 {
     resizeDiv();
+    
+    // Get all the divs! :D
     canvas = $('#text-canvas');
+    primaryContent = $('#primaryContent');
     body = $('#page');
     navpanel = $('#nav-panel');
-    
+    playpanel = $('#play-panel');
     btnNewFile = $('#newfile');
-    btnNewFile.click(function() {
-    	newFile();
-    });
-    
     btnOpenFile = $('#openfile');
     inpOpenFile = $('#open-file');
+    
     inpOpenFile.css('opacity', 0);
     inpOpenFile.css('filter', 'alpha(opacity = 0');
     inpOpenFile.hide();
-    btnOpenFile.click(function() {
-        inpOpenFile.trigger('click');
-        return false;
-    });
+    
+    addBaseEvents();
     addMenuEvents();
     hideMenuItems();
     setCanvasHeight();
@@ -55,11 +55,34 @@ function setCanvasHeight()
     var width = elem.clientWidth;
     canvas.css('height', (height - 50));
     body.css('height', height);
+    primaryContent.css('height', height);
     navpanel.css('height', height);
+}
+
+function addBaseEvents() 
+{
+	primaryContent.click(function() {
+    	if($('#slide-panel').is(":visible")) {
+    		$('#slide-panel').hide();
+    	}
+    	else {
+    		$('#slide-panel').show();
+    	}
+    });
+    
+    btnNewFile.click(function() {
+    	newFile();
+    });
+    
+    btnOpenFile.click(function() {
+        inpOpenFile.trigger('click');
+        return false;
+    });
 }
 
 function addMenuEvents()
 {	
+
 	$('#back').click(function() {
 		showMenuItems();
 		hideMenuItems();
