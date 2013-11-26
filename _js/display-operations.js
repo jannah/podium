@@ -18,7 +18,7 @@ var cntTotalTime;
 
 var speedSlider;
 var speed = 0;
-var minSpeed = 50;
+var minSpeed = 20;
 var maxSpeed = 250;
 
 var timeEstimate = 0;
