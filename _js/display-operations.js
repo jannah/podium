@@ -494,8 +494,6 @@ function updateSpeed() {
 
 function calculateTime(time) {
     time = Math.round(time);
-    
-    console.log("Time: " + time);
 
     var minutes = Math.floor(time / 60);
 
