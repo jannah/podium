@@ -101,15 +101,6 @@ function setCanvasHeight()
 
 function addBaseEvents()
 {
-// 	primaryContent.click(function() {
-//     	if($('#slide-panel').is(":visible")) {
-//     		$('#slide-panel').hide();
-//     	}
-//     	else {
-//     		$('#slide-panel').show();
-//     	}
-//     });
-
     btnNewFile.click(function() {
         newFile();
     });
@@ -353,11 +344,6 @@ function addMenuEvents()
 
         updateHighlightedWords();
 
-        /*  console.log("Scroll Top=" + canvas.scrollTop()
-         + "\tScroll Height=" + canvas.get(0).scrollHeight
-         + "\tRemaining Scroll =" + (canvas.get(0).scrollHeight - canvas.scrollTop())
-         + "\tProgress=" + progress);
-         */
         if (progress >= 100)
         {
             canvas.stop();
@@ -365,6 +351,7 @@ function addMenuEvents()
         }
     });
 }
+
 function updateHighlightedWords()
 {
     var progress = getProgress();
@@ -450,20 +437,13 @@ function updateSlider() {
 
 function pageScroll()
 {
-
     if (speed <= 1)
         canvas.stop();
     else
     {
         updateSpeed();
-        console.log(speed + "wpm\t" + remainingDuration + "ms");
-
-
-
-
 
         if (playing) {
-
             canvas.stop().animate({
                 scrollTop: canvas.get(0).scrollHeight + 'px'
             }, remainingDuration, "linear");
@@ -471,9 +451,7 @@ function pageScroll()
         else {
             canvas.stop();
         }
-
     }
-
 }
 function updateParagraphTime()
 {
@@ -546,18 +524,19 @@ window.onresize = function(event) {
     resizeDiv();
     setCanvasHeight();
 };
+
 function resizeDiv()
 {
     var vpw = $(window).width();
     var vph = $(window).height();
     $('#content').css({'height': vph + 'px'});
 }
+
 function getWordCount(text)
 {
     var text = text + "";
     var words = text.split(" ");
-//    console.log(words);
-//    console.log('Word Count=' + words.length);
+    
     return words.length;
 }
 
