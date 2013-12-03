@@ -34,7 +34,7 @@
         <div data-role="page" class="ui-responsive-panel">
         	
         	<!-- Full screen mode makes the toolbar disappear when the background is clicked -->
-			<div data-role="header" data-position="fixed" data-fullscreen="true">
+			<div data-role="header" data-position="top"> <!-- data-fullscreen="true"> -->
 				<a href="#nav-panel" data-role="button" data-mini="true">Menu</a>
 				<h1>Podium</h1>
 				
@@ -93,6 +93,10 @@
 
 						</div>
 					</div>
+				</div>
+				
+				<div id="pauseOverlay">
+					
 				</div>
 				
 				<div id="slide-panel" class="content-secondary" data-position="right">
@@ -165,14 +169,14 @@
 				</ul>
             </div>
             
-            <div id="play-panel" data-role="footer" data-position="fixed" data-fullscreen="false">
-				<a id="btnPlay" href="" data-role="button" data-mini="true">Play</a>
-				<a id="btnPause" href="" data-role="button" data-mini="true">Pause</a>
-				
+            <div id="play-panel" data-role="footer" data-theme="a" class="ui-footer ui-bar-a" data-id="myfooter">
+				<a id="btnPlay" href="" data-role="button" data-mini="true" class="big" data-theme="b">Play</a>
+				<a id="btnPause" href="" data-role="button" data-mini="true" class="big">Pause</a>
+			
 				<div id="progress-area">
 					<div id="progress-bar"></div>
 				</div>
-				
+			
 				<div id="currentTime">00:00</div>
 				<div id="timeDivider">&nbsp;/&nbsp;</div>
 				<div id="totalTime">00:00</div>
