@@ -195,12 +195,15 @@ a.ui-slider-handle-vertical, a.ui-slider-handle-verticalInverted {
 }
 
 .paragraph{
-    padding: 10px;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
     float: left;
 
-    width: -moz-calc(100% - 80px);
-    width: -webkit-calc(100% - 80px);
-    width: calc(100% - 80px);
+    width: -moz-calc(100% - 120px);
+    width: -webkit-calc(100% - 120px);
+    width: calc(100% - 120px);
 }
 
 .paragraph-time {
