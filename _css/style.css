@@ -238,6 +238,7 @@ a.ui-slider-handle-vertical, a.ui-slider-handle-verticalInverted {
     color: rgb(120,120,120);
     text-decoration: underline;
 }
+
 .big {
     width: 75px;
     height: 50px;
@@ -267,7 +268,7 @@ a.ui-slider-handle-vertical, a.ui-slider-handle-verticalInverted {
 
 #currentTime, #totalTime, #timeDivider {
     height: 22px;
-    color: #fff;
+    color: #000;
     margin-top: 15px;
     float: left;
 }
