@@ -44,7 +44,7 @@ root {
 }
 
 .content-primary {
-    width: 94%;
+    width: 95%;
     float: left;
 }
 
@@ -191,7 +191,7 @@ a.ui-slider-handle-vertical, a.ui-slider-handle-verticalInverted {
     /* margin: 0 auto; */
     vertical-align: middle;
     color: #A8A8A8;
-    width: 50px;
+    width: 40px;
 }
 
 .paragraph{
@@ -200,13 +200,13 @@ a.ui-slider-handle-vertical, a.ui-slider-handle-verticalInverted {
 
     width: -moz-calc(100% - 80px);
     width: -webkit-calc(100% - 80px);
-    width: calc(100% - 80px);
+    width: calc(100% - 150px);
 }
 
 .paragraph-time {
     padding: 10px 15px;
     float: left;
-    width: 30px;
+    width: 50px;
 }
 
 .paragraph p{

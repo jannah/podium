@@ -475,7 +475,36 @@ function pageScroll()
     }
 
 }
+function updateParagraphTime()
+{
+    var paras = $('.paragraph-div')
+    var cumCount = 0;
+    var cumDuration = -2/60;
+    var totalCount = getWordCount(grabText());
+    var totalDuration = (totalCount / speed);
+    var totalTime = calculateTime(totalDuration * 60);
+    var edgeWord = Math.floor(getProgress() * totalCount);
+    var edgeDuration = edgeWord / speed;
 
+    for (var i = 0, j = paras.length; i < j; i++)
+    {
+        var para = paras[i]
+        var paraText = $(para).children('.paragraph').text();
+        var pwc = getWordCount(paraText);
+
+        var duration = pwc / speed;
+        cumDuration += duration;
+        cumCount += pwc;
+        var remDuration = (cumDuration <= edgeDuration) ? 0 : cumDuration - edgeDuration;
+        var remTime = calculateTime(remDuration * 60);
+        var durationTime = calculateTime(duration * 60);
+        $(para).children('.paragraph-time').empty()
+                .attr('data-count', cumCount)
+                .append(((remDuration > duration) ? durationTime : remTime) + "/" + durationTime);
+        
+//        console.log(remDuration+"\t"+remTime+"\t"+duration+"\t"+durationTime);
+    }
+}
 function updateSpeed() {
     var text = grabText();
     var wordCount = getWordCount(text);
@@ -485,10 +514,11 @@ function updateSpeed() {
 
     var elapsed = (duration * 60) - (remainingDuration / 1000);
 
-    if (wordCount !== 1)
+    if (wordCount !== 1 && speed > 0)
     {
         cntTotalTime.text(calculateTime(duration * 60));
         cntTime.text(calculateTime(elapsed));
+        updateParagraphTime();
     }
 }
 
