@@ -8,6 +8,7 @@ $(document).ready(function() {
     initFileOps();
 });
 //var file;
+var wordIds = [];
 function initFileOps()
 {
 //    addTextEditEvent();
@@ -114,8 +115,10 @@ function cleanParagraph(para, paraIndex)
             {
 
                 var word = words[k];
+                var wordId = "word-" + paraIndex + "-" + i + "-" + k;
+                wordIds.push(wordId);
                 if (word && word.length > 0)
-                    wout += "<span id='word-" + paraIndex + "-" + i + "-" + k
+                    wout += "<span id='"+wordId
                             + "' class='word-" + k + " word'>"
                             + word + " </span>";
             }
@@ -143,6 +146,7 @@ function saveCurrentFile()
 function processText(text)
 {
     var output = "";
+    wordIds=[];
     var paragraphs = text.split("\n");
 
 //        console.log(paragraphs);

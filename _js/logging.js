@@ -60,6 +60,6 @@ function logEventToDb(event)
         'asycn': false
     }).done(function(data)
     {
-        console.log(data);
+//        console.log(data);
     });
 }

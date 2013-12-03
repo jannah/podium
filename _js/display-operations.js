@@ -20,8 +20,11 @@ var slidePanel;
 
 var speedSlider;
 var speed = 0;
-var minSpeed = 20;
-var maxSpeed = 250;
+var minSpeed = 50;
+var maxSpeed = 400;
+var speedFactor = 10;
+var increment = 10;
+var speedSteps;
 
 var timeEstimate = 0;
 var remainingDuration = 0;
@@ -37,7 +40,7 @@ function initDisplay()
     // Get all the divs! :D
     canvas = $('#text-canvas');
     primaryContent = $('#primaryContent');
-    
+
     body = $('#page');
     navpanel = $('#nav-panel');
     playpanel = $('#play-panel');
@@ -52,15 +55,16 @@ function initDisplay()
     speedSlider = $('#speedSlider');
     cntTime = $('#currentTime');
     cntTotalTime = $('#totalTime');
-    
+
     slidePanel = $('#slide-panel');
     rightMenu = $('#right-menu');
-    
+
     addBaseEvents();
     addMenuEvents();
     hideMenuItems();
     setCanvasHeight();
     updateProgressBar();
+    initSlider();
     updateSlider();
 }
 
@@ -69,15 +73,15 @@ function setCanvasHeight()
     var elem = (document.compatMode === "CSS1Compat") ?
             document.documentElement :
             document.body;
-    
+
     var headHeight = 77;
     var footHeight = 60;
-    
+
     var height = elem.clientHeight - headHeight - footHeight;
     var width = elem.clientWidth;
     canvas.css('height', (height - 50));
     body.css('height', height);
-    
+
     primaryContent.css('height', height);
     pauseOverlay.css('height', height);
     // set pauseOverlay's position equal to primaryContent
@@ -85,12 +89,12 @@ function setCanvasHeight()
     var leftPos = primaryContent.left;
     pauseOverlay.css('top', topPos);
     pauseOverlay.css('left', leftPos);
-    
+
     navpanel.css('height', height);
-    
+
     // Make slide panel shorter and set the top position right underneath the header
     slidePanel.css('height', height);
-    
+
     rightMenu.css('height', height);
     rightMenu.css('top', headHeight);
 }
@@ -105,7 +109,7 @@ function addBaseEvents()
 //     		$('#slide-panel').show();
 //     	}
 //     });
-    
+
     btnNewFile.click(function() {
         newFile();
     });
@@ -122,7 +126,7 @@ function addMenuEvents()
     $('#back').click(function() {
         showMenuItems();
         hideMenuItems();
-        
+
         var event = new Event();
         event.action = 0;
         event.target = 'Back';
@@ -172,6 +176,7 @@ function addMenuEvents()
     $('#bigger-text').click(function() {
         fontSize += 0.25;
         canvas.css('font-size', fontSize + 'em');
+
         var event = new Event();
         event.target = 'Bigger Font';
         event.value = fontSize + '';
@@ -183,6 +188,7 @@ function addMenuEvents()
     $('#smaller-text').click(function() {
         fontSize -= 0.25;
         canvas.css('font-size', fontSize + 'em');
+        console.log('line H=' + canvas.css('line-height'));
         var event = new Event();
         event.target = 'Smaller Font';
         event.value = fontSize + '';
@@ -345,6 +351,8 @@ function addMenuEvents()
     {
         var progress = updateProgressBar();
 
+        updateHighlightedWords();
+
         /*  console.log("Scroll Top=" + canvas.scrollTop()
          + "\tScroll Height=" + canvas.get(0).scrollHeight
          + "\tRemaining Scroll =" + (canvas.get(0).scrollHeight - canvas.scrollTop())
@@ -357,7 +365,29 @@ function addMenuEvents()
         }
     });
 }
+function updateHighlightedWords()
+{
+    var progress = getProgress();
+    var wordCount = wordIds.length;
+    var lastWord = Math.ceil(progress * wordCount);
+    console.log('last word=' + lastWord + "\t" + wordIds[lastWord]);
 
+    for (var i = 0; i < wordCount; i++)
+    {
+        var id = '#' + wordIds[i];
+        if (i <= lastWord)
+        {
+            $(id).addClass('done-word');
+            if (playing)
+                $(id).addClass('last-done-word');
+        }
+        else
+            $(id).removeClass('done-word');
+    }
+
+
+
+}
 function changeVisibility(hideItems, showItems) {
     $.each(hideItems, function(i, id) {
         $("#" + id).hide();
@@ -391,33 +421,48 @@ function hideMenuItems() {
     $('#mode-first').hide();
     $('#mode-outline').hide();
 }
+function initSlider()
+{
+    speedSteps = Math.ceil((maxSpeed - minSpeed) / increment);
+
+
+    speedSlider.prop('min', 0)
+            .prop('max', speedSteps)
+            .prop('step', 1)
+            .prop('value', 0);
+}
 
 function updateSlider() {
     // Default speed value
-    var val = speedSlider.val();
-    speed = (val === 0) ? 0 : minSpeed + val * 10;
+//    var val = speedSlider.val();
+//    speed = (val === 0) ? 0 : minSpeed + val * increment;
 
-    console.log(speed);
+//    console.log(speed);
 
     speedSlider.change(function()
     {
         var value = $(this).val();
-        speed = (value === 0) ? 0 : minSpeed + value * 10;
+        speed = (value === 0) ? 0 : minSpeed + value * increment;
 
         pageScroll();
     });
 }
 
-function pageScroll() {
+function pageScroll()
+{
 
-    if (speed === 1)
+    if (speed <= 1)
         canvas.stop();
-    else {
+    else
+    {
         updateSpeed();
-
         console.log(speed + "wpm\t" + remainingDuration + "ms");
 
-        if (playing == true) {
+
+
+
+
+        if (playing) {
 
             canvas.stop().animate({
                 scrollTop: canvas.get(0).scrollHeight + 'px'
@@ -426,7 +471,9 @@ function pageScroll() {
         else {
             canvas.stop();
         }
+
     }
+
 }
 
 function updateSpeed() {
@@ -434,11 +481,12 @@ function updateSpeed() {
     var wordCount = getWordCount(text);
     var duration = wordCount / speed;
 
-    remainingDuration = duration * 60 * 100 * (1 - getProgress());
+    remainingDuration = duration * 60 * 1000 * (1 - getProgress());
 
     var elapsed = (duration * 6) - (remainingDuration / 1000);
 
-    if (wordCount != 1) {
+    if (wordCount !== 1)
+    {
         cntTotalTime.text(calculateTime(duration * 6));
         cntTime.text(calculateTime(elapsed));
     }
@@ -479,7 +527,7 @@ function getWordCount(text)
     var text = text + "";
     var words = text.split(" ");
 //    console.log(words);
-    console.log('Words=' + words.length);
+//    console.log('Word Count=' + words.length);
     return words.length;
 }
 
@@ -490,7 +538,8 @@ function getProgress()
     var scrollH = canvas.get(0).scrollHeight;
     var progress = 0;
 
-    if (currentScroll != 0) {
+    if (currentScroll !== 0)
+    {
         var progress = currentScroll / (scrollH - canvasH);
     }
 
@@ -533,7 +582,7 @@ function updateProgressBar()
     var bar = $('#progress-bar');
     bar.css('width', progress + '%');
     bar.text(progress + '%');
-    
+
     updateSpeed();
 
     return progress;

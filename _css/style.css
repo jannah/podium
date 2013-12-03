@@ -11,17 +11,17 @@ root {
 }
 
 .nav-button {
-	color: #fff;
-	text-shadow: none;
+    color: #fff;
+    text-shadow: none;
 }
 
 .nav-search .ui-btn-up-a {
-	background-image:none;
-	background-color:#333333;
+    background-image:none;
+    background-color:#333333;
 }
 .nav-search .ui-btn-inner {
-	border-top: 1px solid #888;
-	border-color: rgba(255, 255, 255, .1);
+    border-top: 1px solid #888;
+    border-color: rgba(255, 255, 255, .1);
 }
 
 #main-menu
@@ -38,25 +38,25 @@ root {
 
 #page
 {
-	overflow: hidden;
-	margin-left: 0px;
-	padding-left: 0px;
+    overflow: hidden;
+    margin-left: 0px;
+    padding-left: 0px;
 }
 
 .content-primary {
-	width: 94%;
-	float: left;
+    width: 94%;
+    float: left;
 }
 
 #pauseOverlay {
-	width: 94%;
-	position: absolute;
+    width: 94%;
+    position: absolute;
 }
 
 .content-secondary {
-	width: 6%;
-	float: left;
-	height: 100%;
+    width: 6%;
+    float: left;
+    height: 100%;
 }
 
 #canvas
@@ -126,43 +126,43 @@ root {
 }
 
 label.ui-slider-vertical { 
-	display: block; 
+    display: block; 
 }
 
 a.ui-slider-handle-vertical .ui-btn-inner { 
-	padding-left: 0;
-	padding-right: 0;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 div.ui-slider-vertical, div.ui-slider-verticalInverted { 
-	position: relative;
-	display: inline-block;
-	overflow: visible;
-	height: 50%;
-	padding: 0;
-	margin: 0 2% 0 40px;
-	top: 25%;
-	width:15px;
+    position: relative;
+    display: inline-block;
+    overflow: visible;
+    height: 50%;
+    padding: 0;
+    margin: 0 2% 0 40px;
+    top: 25%;
+    width:15px;
 }
 
 label.ui-slider-vertical, label.ui-slider-verticalInverted { 
-	display: inline-block; 
-	width: 20%;
-	margin: 0 2% 0 0;
+    display: inline-block; 
+    width: 20%;
+    margin: 0 2% 0 0;
 }
 
 div.ui-slider-vertical, div.ui-slider-verticalInverted { 
-	width: 15px;
+    width: 15px;
 }
 
 a.ui-slider-handle-vertical, a.ui-slider-handle-verticalInverted { 
-	position: absolute;
-	z-index: 10; 
-	top: 50%;
-	width: 28px;
-	height: 28px;
-	margin-top: -15px;
-	margin-left: -8px;
+    position: absolute;
+    z-index: 10; 
+    top: 50%;
+    width: 28px;
+    height: 28px;
+    margin-top: -15px;
+    margin-left: -8px;
 }
 
 /* TEXT */
@@ -178,8 +178,8 @@ a.ui-slider-handle-vertical, a.ui-slider-handle-verticalInverted {
 }
 
 .paragraph-div {
-	width: 100%;
-	float: left;
+    width: 100%;
+    float: left;
 }
 
 .paragraph-label{
@@ -197,16 +197,16 @@ a.ui-slider-handle-vertical, a.ui-slider-handle-verticalInverted {
 .paragraph{
     padding: 10px;
     float: left;
-    
+
     width: -moz-calc(100% - 80px);
     width: -webkit-calc(100% - 80px);
     width: calc(100% - 80px);
 }
 
 .paragraph-time {
-	padding: 10px 15px;
-	float: left;
-	width: 30px;
+    padding: 10px 15px;
+    float: left;
+    width: 30px;
 }
 
 .paragraph p{
@@ -230,16 +230,23 @@ a.ui-slider-handle-vertical, a.ui-slider-handle-verticalInverted {
 .highlighted-word{
     font-weight: bold;
 }
+.last-done-word{
+    background-color: rgb(200,200,200);
+}
+.done-word{
 
+    color: rgb(120,120,120);
+    text-decoration: underline;
+}
 .big {
-	width: 75px;
-	height: 50px;
-	line-height: 32px;
-	font-size: 32px;
+    width: 75px;
+    height: 50px;
+    line-height: 32px;
+    font-size: 32px;
 }
 
 #btnPlay, #btnPause {
-	float: left;
+    float: left;
 }
 
 #progress-area{
@@ -259,8 +266,8 @@ a.ui-slider-handle-vertical, a.ui-slider-handle-verticalInverted {
 }
 
 #currentTime, #totalTime, #timeDivider {
-	height: 22px;
-	color: #fff;
-	margin-top: 15px;
-	float: left;
+    height: 22px;
+    color: #fff;
+    margin-top: 15px;
+    float: left;
 }
