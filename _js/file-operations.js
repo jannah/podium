@@ -7,8 +7,11 @@
 $(document).ready(function() {
     initFileOps();
 });
+
 //var file;
 var wordIds = [];
+var paragraphs = [];
+
 function initFileOps()
 {
 //    addTextEditEvent();
@@ -122,6 +125,7 @@ function cleanParagraph(para, paraIndex)
                             + "' class='word-" + k + " word'>"
                             + word + " </span>";
             }
+            
             outCount++;
             sout = "<span id='sentence-" + paraIndex + "-" + i + "' class='sentence sentence-" + outCount + "' class='sentence'>"
                     + wout.trim() + " </span>";
@@ -136,18 +140,16 @@ function cleanParagraph(para, paraIndex)
     return output;
 }
 
-
-
-
 function saveCurrentFile()
 {
     return 0;
 }
+
 function processText(text)
 {
     var output = "";
     wordIds=[];
-    var paragraphs = text.split("\n");
+    paragraphs = text.split("\n");
 
 //        console.log(paragraphs);
 
@@ -176,6 +178,7 @@ function processText(text)
     addTextEditEvent();
 
 }
+
 function reloadText()
 {
     var paragraphs = $('.paragraph');
@@ -192,6 +195,7 @@ function reloadText()
     console.log(out);
     processText(out);
 }
+
 function addTextEditEvent()
 {
     var paras = $('.paragraph');
