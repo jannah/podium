@@ -4,14 +4,14 @@
  * and open the template in the editor.
  */
 
-var currentUser = "";
+var currentUser = 0;
 var USERS_FILE = "users.txt";
 var EVENTS_FILE = "events.txt";
-
+var DB_FILE = 'db-operations.php';
 $(document).ready(function() {
 
-   createUser();
-   console.log(currentUser);
+//    createUser();
+//    console.log(currentUser);
 });
 function Event()
 {
@@ -30,47 +30,18 @@ function User()
     this.gender = "";
     this.education = "";
     this.occupation = "";
+    this.temp_id = 0;
 }
-function createUser()
+
+function setCurrentUserId(id)
 {
-//    var lines = readFileLines(USERS_FILE);
-//    currentUser = "user-" + lines.length;
-    currentUser = Math.ceil(Math.random() * 1000000);
+    currentUser = id;
+}
+function getCurrentUserId()
+{
     return currentUser;
 }
-/**
- * 
- * @param {User} user
- * @returns {undefined}
- */
-function logUser(user)
-{
-    var str = ((event.user) ? event.user : currentUser)
-            + "\t" + user.id
-            + "\t" + user.age
-            + "\t" + user.gender
-            + "\t" + user.education
-            + "\t" + user.occupation;
 
-    writeToFile(USERS_FILE, str);
-
-}
-/**
- * 
- * @param {Event} event
- * @returns {undefined}
- */
-function logEvent(event)
-{
-    var str = "";
-    str += event.id
-            + "\t" + event.user
-            + "\t" + event.target
-            + "\t" + event.value
-            + "\t" + event.action
-            + "\t" + event.timestamp;
-    writeToFile(EVENTS_FILE, str);
-}
 /**
  * 
  * @param {Event} event
@@ -81,25 +52,14 @@ function logEventToDb(event)
     event.user = (event.user) ? event.user : currentUser;
     var sql = "INSERT INTO podium_logs (user_id, target, value, action) "
             + "VALUES (" + currentUser + ",'" + event.target + "','" + event.value
-            + "'," + event.action +  ")";
+            + "'," + event.action + ")";
 
     $.ajax({'type': 'GET',
-        'url': 'db-insert.php',
-        'data': {'q': sql}
+        'url': DB_FILE,
+        'data': {'q': sql},
+        'asycn': false
     }).done(function(data)
     {
         console.log(data);
     });
-}
-function writeToFile(filename, str)
-{
-    var fw = new FileWriter()
-
-}
-
-function readFileLines(filename)
-{
-    var lines = [];
-
-    return lines;
 }

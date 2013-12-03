@@ -98,26 +98,51 @@ function addMenuEvents()
     $('#back').click(function() {
         showMenuItems();
         hideMenuItems();
-
-        saveAction("back");
+        
+        var event = new Event();
+        event.action = 0;
+        event.target = 'Back';
+        event.value = "";
+        event.user = getCurrentUserId();
+        logEventToDb(event);
+//        saveAction("back");
     });
 
     $('#fonts').click(function() {
         var hideItems = ["fonts", "bigger-text", "smaller-text", "line-height", "themes", "theme-bw", "theme-wb", "theme-by", "compact", "normal", "stretch",
             "text-mode", "mode-full", "mode-first", "mode-outline"];
         var showItems = ["back", "serif", "sans-serif"];
-
         changeVisibility(hideItems, showItems);
+
+        var event = new Event();
+        event.action = 0;
+        event.target = 'Fonts';
+        event.value = "";
+        event.user = getCurrentUserId();
+        logEventToDb(event);
     });
 
     $('#serif').click(function() {
         canvas.css('font-family', 'serif');
         pageScroll();
+
+        var event = new Event();
+        event.action = 0;
+        event.target = 'Change Font';
+        event.value = "Serif";
+        event.user = getCurrentUserId();
+        logEventToDb(event);
     });
 
     $('#sans-serif').click(function() {
         canvas.css('font-family', 'sans-serif');
         pageScroll();
+        var event = new Event();
+        event.action = 0;
+        event.target = 'Change Font';
+        event.value = "Sans-serif";
+        event.user = getCurrentUserId();
+        logEventToDb(event);
     });
 
     $('#bigger-text').click(function() {
@@ -146,6 +171,12 @@ function addMenuEvents()
         var hideItems = ["fonts", "bigger-text", "smaller-text", "serif", "sans-serif", "line-height", "themes", "compact", "normal", "stretch",
             "text-mode", "mode-full", "mode-first", "mode-outline"];
         var showItems = ["back", "theme-bw", "theme-wb", "theme-by"];
+        var event = new Event();
+        event.action = 0;
+        event.target = 'Themes';
+        event.value = "";
+        event.user = getCurrentUserId();
+        logEventToDb(event);
 
         changeVisibility(hideItems, showItems);
     });
@@ -155,6 +186,13 @@ function addMenuEvents()
         canvas.css('color', 'white');
         body.css('background-color', 'black');
         body.css('color', 'white');
+
+        var event = new Event();
+        event.action = 0;
+        event.target = 'Change Theme';
+        event.value = "BW";
+        event.user = getCurrentUserId();
+        logEventToDb(event);
     });
 
     $('#theme-wb').click(function() {
@@ -162,6 +200,12 @@ function addMenuEvents()
         canvas.css('color', 'black');
         body.css('background-color', 'white');
         body.css('color', 'black');
+        var event = new Event();
+        event.action = 0;
+        event.target = 'Change Theme';
+        event.value = "WB";
+        event.user = getCurrentUserId();
+        logEventToDb(event);
     });
 
     $('#theme-by').click(function() {
@@ -169,48 +213,94 @@ function addMenuEvents()
         canvas.css('color', 'black');
         body.css('background-color', 'rgb(255,245,220)');
         body.css('color', 'black');
+        var event = new Event();
+        event.action = 0;
+        event.target = 'Change Theme';
+        event.value = "BY";
+        event.user = getCurrentUserId();
+        logEventToDb(event);
     });
 
     $('#line-height').click(function() {
         var hideItems = ["fonts", "bigger-text", "smaller-text", "serif", "sans-serif", "line-height", "themes", "theme-bw", "theme-wb", "theme-by",
             "text-mode", "mode-full", "mode-first", "mode-outline"];
         var showItems = ["back", "compact", "normal", "stretch"];
-
+        var event = new Event();
+        event.action = 0;
+        event.target = 'Line Height';
+        event.value = "";
+        event.user = getCurrentUserId();
+        logEventToDb(event);
         changeVisibility(hideItems, showItems);
     });
 
     $('#compact').click(function() {
         $('.paragraph').css('line-height', '1');
         pageScroll();
+        var event = new Event();
+        event.action = 0;
+        event.target = 'Change Line Height';
+        event.value = "Compact";
+        event.user = getCurrentUserId();
+        logEventToDb(event);
     });
 
     $('#normal').click(function() {
         $('.paragraph').css('line-height', '1.5');
         pageScroll();
+        var event = new Event();
+        event.action = 0;
+        event.target = 'Change Line Height';
+        event.value = "Normal";
+        event.user = getCurrentUserId();
+        logEventToDb(event);
     });
 
     $('#stretch').click(function() {
         $('.paragraph').css('line-height', '2');
         pageScroll();
+        var event = new Event();
+        event.action = 0;
+        event.target = 'Change Line Height';
+        event.value = "Stretch";
+        event.user = getCurrentUserId();
+        logEventToDb(event);
     });
 
     $('#text-mode').click(function() {
         var hideItems = ["fonts", "bigger-text", "smaller-text", "serif", "sans-serif", "line-height", "compact", "normal", "stretch", "themes",
             "theme-bw", "theme-wb", "theme-by", "text-mode"];
         var showItems = ["back", "mode-full", "mode-first", "mode-outline"];
-
+        var event = new Event();
+        event.action = 0;
+        event.target = 'Text Mode';
+        event.value = "";
+        event.user = getCurrentUserId();
+        logEventToDb(event);
         changeVisibility(hideItems, showItems);
     });
 
     $('#mode-full').click(function() {
         $('.sentence').css('display', 'inline');
         $('.word').css('display', 'inline');
+        var event = new Event();
+        event.action = 0;
+        event.target = 'Change Text Mode';
+        event.value = "Full";
+        event.user = getCurrentUserId();
+        logEventToDb(event);
         pageScroll();
     });
 
     $('#mode-first').click(function() {
         $('.sentence').css('display', 'none');
         $('.sentence-1').css('display', 'inline');
+        var event = new Event();
+        event.action = 0;
+        event.target = 'Change Text Mode';
+        event.value = "First Sentence";
+        event.user = getCurrentUserId();
+        logEventToDb(event);
         pageScroll();
     });
 
@@ -218,6 +308,12 @@ function addMenuEvents()
         $('.sentence').css('display', 'inline');
         $('.word').css('display', 'none');
         $('.highlighted-word').css('display', 'inline');
+        var event = new Event();
+        event.action = 0;
+        event.target = 'Change Text Mode';
+        event.value = "Outline";
+        event.user = getCurrentUserId();
+        logEventToDb(event);
         pageScroll();
     });
 
