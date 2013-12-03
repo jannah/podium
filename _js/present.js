@@ -6,6 +6,7 @@
 
 var btnPlay;
 var btnPause;
+var pauseOverlay;
 
 var playing = false;
  
@@ -17,8 +18,10 @@ $(document).ready(function() {
 function initPresentOps() {
 	btnPlay = $('#btnPlay');
 	btnPause = $('#btnPause');
+	pauseOverlay = $('#pauseOverlay');
 	
 	btnPause.hide();
+	pauseOverlay.hide();
 }
 
 function addPresentEvents() {
@@ -30,6 +33,10 @@ function addPresentEvents() {
 	btnPause.click(function() {
 		pausePresentation();
 	});
+	
+	pauseOverlay.click(function() {
+    	pausePresentation();
+    });
 }
 
 function startPresentation() {
@@ -42,6 +49,7 @@ function startPresentation() {
 		
 		btnPlay.hide();
 		btnPause.show();
+		pauseOverlay.show();
 	}
 }
 
@@ -53,4 +61,5 @@ function pausePresentation() {
 	
 	btnPlay.show();
 	btnPause.hide();
+	pauseOverlay.hide();
 }

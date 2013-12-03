@@ -16,9 +16,11 @@ var fontSize = 1;
 var cntTime;
 var cntTotalTime;
 
+var slidePanel;
+
 var speedSlider;
 var speed = 0;
-var minSpeed = 50;
+var minSpeed = 20;
 var maxSpeed = 250;
 
 var timeEstimate = 0;
@@ -35,6 +37,7 @@ function initDisplay()
     // Get all the divs! :D
     canvas = $('#text-canvas');
     primaryContent = $('#primaryContent');
+    
     body = $('#page');
     navpanel = $('#nav-panel');
     playpanel = $('#play-panel');
@@ -49,7 +52,10 @@ function initDisplay()
     speedSlider = $('#speedSlider');
     cntTime = $('#currentTime');
     cntTotalTime = $('#totalTime');
-
+    
+    slidePanel = $('#slide-panel');
+    rightMenu = $('#right-menu');
+    
     addBaseEvents();
     addMenuEvents();
     hideMenuItems();
@@ -63,25 +69,43 @@ function setCanvasHeight()
     var elem = (document.compatMode === "CSS1Compat") ?
             document.documentElement :
             document.body;
-    var height = elem.clientHeight - 78;
+    
+    var headHeight = 77;
+    var footHeight = 60;
+    
+    var height = elem.clientHeight - headHeight - footHeight;
     var width = elem.clientWidth;
     canvas.css('height', (height - 50));
     body.css('height', height);
+    
     primaryContent.css('height', height);
+    pauseOverlay.css('height', height);
+    // set pauseOverlay's position equal to primaryContent
+    var topPos = primaryContent.top;
+    var leftPos = primaryContent.left;
+    pauseOverlay.css('top', topPos);
+    pauseOverlay.css('left', leftPos);
+    
     navpanel.css('height', height);
+    
+    // Make slide panel shorter and set the top position right underneath the header
+    slidePanel.css('height', height);
+    
+    rightMenu.css('height', height);
+    rightMenu.css('top', headHeight);
 }
 
 function addBaseEvents()
 {
-    primaryContent.click(function() {
-        if ($('#slide-panel').is(":visible")) {
-            $('#slide-panel').hide();
-        }
-        else {
-            $('#slide-panel').show();
-        }
-    });
-
+// 	primaryContent.click(function() {
+//     	if($('#slide-panel').is(":visible")) {
+//     		$('#slide-panel').hide();
+//     	}
+//     	else {
+//     		$('#slide-panel').show();
+//     	}
+//     });
+    
     btnNewFile.click(function() {
         newFile();
     });
@@ -320,6 +344,7 @@ function addMenuEvents()
     canvas.scroll(function()
     {
         var progress = updateProgressBar();
+
         /*  console.log("Scroll Top=" + canvas.scrollTop()
          + "\tScroll Height=" + canvas.get(0).scrollHeight
          + "\tRemaining Scroll =" + (canvas.get(0).scrollHeight - canvas.scrollTop())
@@ -328,6 +353,7 @@ function addMenuEvents()
         if (progress >= 100)
         {
             canvas.stop();
+            pausePresentation();
         }
     });
 }
@@ -503,11 +529,11 @@ function addWordEvents()
 
 function updateProgressBar()
 {
-    var progress = Math.ceil(getProgress() * 100) + '%';
+    var progress = Math.ceil(getProgress() * 100);
     var bar = $('#progress-bar');
-    bar.css('width', progress);
-    bar.text(progress);
-
+    bar.css('width', progress + '%');
+    bar.text(progress + '%');
+    
     updateSpeed();
 
     return progress;
