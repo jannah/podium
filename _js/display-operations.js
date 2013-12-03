@@ -483,17 +483,19 @@ function updateSpeed() {
 
     remainingDuration = duration * 60 * 1000 * (1 - getProgress());
 
-    var elapsed = (duration * 6) - (remainingDuration / 1000);
+    var elapsed = (duration * 60) - (remainingDuration / 1000);
 
     if (wordCount !== 1)
     {
-        cntTotalTime.text(calculateTime(duration * 6));
+        cntTotalTime.text(calculateTime(duration * 60));
         cntTime.text(calculateTime(elapsed));
     }
 }
 
 function calculateTime(time) {
     time = Math.round(time);
+    
+    console.log("Time: " + time);
 
     var minutes = Math.floor(time / 60);
 
