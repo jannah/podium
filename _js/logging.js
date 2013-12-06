@@ -42,6 +42,48 @@ function getCurrentUserId()
     return currentUser;
 }
 
+function storeFeedback()
+{
+    var feedback = {
+        user_id: currentUser,
+        good: $("#fb-good").val(),
+        bad: $('#fb-bad').val(),
+        limitation: $('#fb-limit').val(),
+        suggest: $('#fb-suggest').val(),
+        rehearse: $('input[name*=fb-rehearse-choice]:checked').val(),
+        present: $('input[name*=fb-present-choice]:checked').val(),
+        use_again: $('input[name*=fb-again-choice]:checked').val(),
+        overall_rating: $('input[name*=fb-rate-choice]:checked').val()
+    };
+    console.log(feedback);
+    var sql = 'insert into podium_feedback (';
+    var first = true;
+    for (var key in feedback)
+    {
+        sql += (!first) ? ',' : '';
+        first = false;
+        sql += key;
+    }
+    sql += ') values (';
+    first = true;
+    for (var key in feedback)
+    {
+        sql += (!first) ? ',' : '';
+        first = false;
+        sql += '"' + feedback[key] + '"';
+    }
+    sql += ')';
+
+    console.log(sql);
+    $.ajax({'type': 'GET',
+        'url': DB_FILE,
+        'data': {'q': sql},
+        'asycn': false
+    }).done(function(data)
+    {
+//        console.log(data);
+    });
+}
 /**
  * 
  * @param {Event} event

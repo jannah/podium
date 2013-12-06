@@ -23,7 +23,7 @@ function initFileOps()
  */
 function processFile(file)
 {
-//    console.log(file.type);
+//    //console.log(file.type);
     switch (file.type)
     {
         case 'text/plain':
@@ -37,13 +37,23 @@ function processFile(file)
 
 }
 
+function loadRemoteFile(path)
+{
+    var request = new XMLHttpRequest();
+    request.open("GET", path, false);
+    request.send(null);
+    var text = request.responseText;
+    processText(text);
+//    return returnValue;
+}
+
 function readFileAsText(file)
 {
 
     var reader = new FileReader();
     reader.onload = function(e) {
         var text = reader.result;
-//        console.log(text);
+//        //console.log(text);
         processText(text);
     };
     reader.readAsText(file);
@@ -51,19 +61,19 @@ function readFileAsText(file)
 
 function readFileAsDocx(file)
 {
-    console.log(file);
+    //console.log(file);
 
 
     var reader = new FileReader();
     reader.onload = function(e) {
         var text = reader.result;
-        console.log(text);
+        //console.log(text);
         var doc = new docx(text);
-        console.log(doc);
+        //console.log(doc);
         /*   var output = "";
          var paragraphs = text.split("\n");
          
-         //        console.log(paragraphs);
+         //        //console.log(paragraphs);
          
          for (var i = 0, j = paragraphs.length; i < j; i++)
          {
@@ -81,16 +91,16 @@ function readFileAsDocx(file)
          output += out;
          }
          
-         console.log(output);
+         //console.log(output);
          
          $('#text-canvas').empty().append(output);
          */
     };
     reader.readAsText(file);
 //    var doc = new docx(file);
-//    console.log(doc);
+//    //console.log(doc);
 //    var output = convertContent(doc);
-//    console.log(output);
+//    //console.log(output);
 }
 
 function cleanParagraph(para, paraIndex)
@@ -106,7 +116,7 @@ function cleanParagraph(para, paraIndex)
     {
         var sout = "";
         var sentence = sentences[i] + '.';
-//        console.log(sentence);
+//        //console.log(sentence);
         if ($.inArray(sentence, ignoreArray) !== -1)
         {
             continue;
@@ -121,21 +131,21 @@ function cleanParagraph(para, paraIndex)
                 var wordId = "word-" + paraIndex + "-" + i + "-" + k;
                 wordIds.push(wordId);
                 if (word && word.length > 0)
-                    wout += "<span id='"+wordId
+                    wout += "<span id='" + wordId
                             + "' class='word-" + k + " word'>"
                             + word + " </span>";
             }
-            
+
             outCount++;
             sout = "<span id='sentence-" + paraIndex + "-" + i + "' class='sentence sentence-" + outCount + "' class='sentence'>"
                     + wout.trim() + " </span>";
-//            console.log(sout);
+//            //console.log(sout);
             output += sout;
         }
 
     }
 
-//    console.log(output);
+//    //console.log(output);
     output = output.replace('\n', '');
     return output;
 }
@@ -148,10 +158,10 @@ function saveCurrentFile()
 function processText(text)
 {
     var output = "";
-    wordIds=[];
+    wordIds = [];
     paragraphs = text.split("\n");
 
-//        console.log(paragraphs);
+//        //console.log(paragraphs);
 
     for (var i = 0, j = paragraphs.length; i < j; i++)
     {
@@ -169,7 +179,7 @@ function processText(text)
         output += out;
     }
 
-//    console.log(output);
+//    //console.log(output);
 
     $('#text-canvas').empty().append(output);
     $('.paragraph-div').first().addClass('first-paragraph');
@@ -183,54 +193,54 @@ function reloadText()
 {
     var paragraphs = $('.paragraph');
 
-    console.log(paragraphs);
+    //console.log(paragraphs);
     var out = "";
     for (var i = 0, j = paragraphs.length; i < j; i++)
     {
         var para = $(paragraphs[i]);
-        console.log(para.html());
+        //console.log(para.html());
         out += para.text() + "\n";
     }
 //        var text = );
-    console.log(out);
+    //console.log(out);
     processText(out);
 }
 
 function addTextEditEvent()
 {
     var paras = $('.paragraph');
-    console.log('Adding edit event');
-    console.log(paras);
+    //console.log('Adding edit event');
+    //console.log(paras);
     for (var i = 0, j = paras.length; i < j; i++)
     {
         var para = $(paras[i]);
         var id = para.attr('id');
-        console.log(para);
+        //console.log(para);
         para.attr('contenteditable', true);
 //        para.unbind('input');
         para.on('click', function() {
-            console.log('para clicked=' + para.attr('id'));
+            //console.log('para clicked=' + para.attr('id'));
         });
 
         $('#' + id).bind('input', function()
         {
 
             var self = $(this);
-            console.log('text changed: ' + self.attr('id'));
-            console.log(self.text());
-            console.log(self.html());
+            //console.log('text changed: ' + self.attr('id'));
+            //console.log(self.text());
+            //console.log(self.html());
             /*var paragraphs = $('.paragraph');
              
-             console.log(paragraphs);
+             //console.log(paragraphs);
              var out = "";
              for (var i = 0, j = paragraphs.length; i < j; i++)
              {
              var para = $(paragraphs[i]);
-             console.log(para.text());
+             //console.log(para.text());
              out += para.text() + "\n";
              }
              //        var text = );
-             console.log(out);
+             //console.log(out);
              //            processText(out);
              */
         });
@@ -239,20 +249,20 @@ function addTextEditEvent()
      $('#text-canvas').unbind('input');
      $('#text-canvas').on('input', function()
      {
-     console.log('text changed');
+     //console.log('text changed');
      var self = $(this);
      var paragraphs = $('.paragraph');
      
-     console.log(paragraphs);
+     //console.log(paragraphs);
      var out = "";
      for (var i = 0, j = paragraphs.length; i < j; i++)
      {
      var para = $(paragraphs[i]);
-     console.log(para.text());
+     //console.log(para.text());
      out += para.text() + "\n";
      }
      //        var text = );
-     console.log(out);
+     //console.log(out);
      processText(out);
      
      });

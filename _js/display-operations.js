@@ -12,6 +12,7 @@ var playpanel;
 var btnOpenFile;
 var inpOpenFile;
 var btnNewFile;
+var btnSpeech1, btnSpeech2, btnFeedback, btnSubmitFeedback;
 var fontSize = 1;
 var cntTime;
 var cntTotalTime;
@@ -47,7 +48,10 @@ function initDisplay()
     btnNewFile = $('#newfile');
     btnOpenFile = $('#openfile');
     inpOpenFile = $('#open-file');
-
+    btnSpeech1 = $('#speech-1');
+    btnSpeech2 = $('#speech-2');
+btnFeedback = $('#feedback-button');
+btnSubmitFeedback = $('#submit-feedback');
     inpOpenFile.css('opacity', 0);
     inpOpenFile.css('filter', 'alpha(opacity = 0');
     inpOpenFile.hide();
@@ -102,14 +106,74 @@ function setCanvasHeight()
 function addBaseEvents()
 {
     btnNewFile.click(function() {
+        var event = new Event();
+        event.action = 0;
+        event.target = 'New File';
+        event.value = '';
+        event.user = getCurrentUserId();
+        logEventToDb(event);
         newFile();
     });
 
     btnOpenFile.click(function() {
+        var event = new Event();
+        event.action = 0;
+        event.target = 'Open File';
+        event.value = file.name;
+        event.user = getCurrentUserId();
+        logEventToDb(event);
+        logEventToDb(event);
         inpOpenFile.trigger('click');
         return false;
     });
+
+    btnSpeech1.click(function() {
+        var event = new Event();
+        event.action = 0;
+        event.target = 'Test File';
+        event.value = 'Speech 1';
+        event.user = getCurrentUserId();
+        logEventToDb(event);
+        loadRemoteFile('./resources/speech1.txt');
+    });
+    btnSpeech2.click(function() {
+        var event = new Event();
+        event.action = 0;
+        event.target = 'Test File';
+        event.value = 'Speech 2';
+        event.user = getCurrentUserId();
+        logEventToDb(event);
+        loadRemoteFile('./resources/speech2.txt');
+    });
+    
+    btnFeedback.click(function()
+    {
+         var event = new Event();
+        event.action = 0;
+        event.target = 'Feedback';
+        event.value = '';
+        event.user = getCurrentUserId();
+        logEventToDb(event);
+        //console.log('feedback');
+//           $("#feedback-popup", $('#page')).popup("open");
+//       $('#feedback-popup').show();
+    });
+    
+        btnSubmitFeedback.click(function()
+    {
+         var event = new Event();
+        event.action = 0;
+        event.target = 'Submit Feedback';
+        event.value = '';
+        event.user = getCurrentUserId();
+        logEventToDb(event);
+        //console.log('submit feedback');
+        storeFeedback();
+//           $("#feedback-popup", $('#page')).popup("open");
+//       $('#feedback-popup').show();
+    });
 }
+
 
 function addMenuEvents()
 {
@@ -166,8 +230,11 @@ function addMenuEvents()
 
     $('#bigger-text').click(function() {
         fontSize += 0.25;
-        canvas.css('font-size', fontSize + 'em');
-
+        $('.paragraph').css('font-size', fontSize + 'em');
+        if (fontSize > 2)
+            $('.paragraph-label, .paragraph-time').css('font-size', '2em');
+        else
+            $('.paragraph-label, .paragraph-time').css('font-size', fontSize + 'em');
         var event = new Event();
         event.target = 'Bigger Font';
         event.value = fontSize + '';
@@ -178,8 +245,13 @@ function addMenuEvents()
 
     $('#smaller-text').click(function() {
         fontSize -= 0.25;
-        canvas.css('font-size', fontSize + 'em');
-        console.log('line H=' + canvas.css('line-height'));
+        $('.paragraph').css('font-size', fontSize + 'em');
+
+        if (fontSize > 2)
+            $('.paragraph-label, .paragraph-time').css('font-size', '2em');
+        else
+            $('.paragraph-label, .paragraph-time').css('font-size', fontSize + 'em');
+//        //console.log('line H=' + canvas.css('line-height'));
         var event = new Event();
         event.target = 'Smaller Font';
         event.value = fontSize + '';
@@ -357,7 +429,7 @@ function updateHighlightedWords()
     var progress = getProgress();
     var wordCount = wordIds.length;
     var lastWord = Math.ceil(progress * wordCount);
-    console.log('last word=' + lastWord + "\t" + wordIds[lastWord]);
+//    //console.log('last word=' + lastWord + "\t" + wordIds[lastWord]);
 
     for (var i = 0; i < wordCount; i++)
     {
@@ -424,7 +496,7 @@ function updateSlider() {
 //    var val = speedSlider.val();
 //    speed = (val === 0) ? 0 : minSpeed + val * increment;
 
-//    console.log(speed);
+//    //console.log(speed);
 
     speedSlider.change(function()
     {
@@ -453,7 +525,41 @@ function pageScroll()
         }
     }
 }
+function updateParagraphTime()
+{
+    var paras = $('.paragraph-div')
+    var cumCount = 0;
+    var cumDuration = -2 / 60;
+    var totalCount = getWordCount(grabText());
+    var totalDuration = (totalCount / speed);
+    var totalTime = calculateTime(totalDuration * 60);
+    var edgeWord = Math.floor(getProgress() * totalCount);
+    var edgeDuration = edgeWord / speed;
 
+    for (var i = 0, j = paras.length; i < j; i++)
+    {
+        var para = paras[i]
+        var paraText = $(para).children('.paragraph').text();
+        var pwc = getWordCount(paraText);
+
+        var duration = pwc / speed;
+        cumDuration += duration;
+        cumCount += pwc;
+        var remDuration = (cumDuration <= edgeDuration) ? 0 : cumDuration - edgeDuration;
+        var remTime = calculateTime(remDuration * 60);
+        var durationTime = calculateTime(duration * 60);
+        var txt = (playing) ? "<span class='rem-time'>" + ((remDuration > duration) ? durationTime : remTime) + "</span>"
+                : "<span id='para-time'>" + durationTime + "</span>";
+        $(para).children('.paragraph-time').empty()
+                .attr('data-count', cumCount)
+                .append(txt);
+
+
+
+
+//        //console.log(remDuration+"\t"+remTime+"\t"+duration+"\t"+durationTime);
+    }
+}
 function updateSpeed() {
     var text = grabText();
     var wordCount = getWordCount(text);
@@ -463,22 +569,11 @@ function updateSpeed() {
 
     var elapsed = (duration * 60) - (remainingDuration / 1000);
 
-    if (wordCount !== 1)
+    if (wordCount !== 1 && speed > 0)
     {
         cntTotalTime.text(calculateTime(duration * 60));
         cntTime.text(calculateTime(elapsed));
-        
-        for (var i = 0; i < paragraphs.length; i++) {
-        	// Time div
-        	var timeDiv = $('#paragraph-time-' + i);
-        
-        	// Word count
-        	var words = paragraphs[i].split(" ");
-        	var count = words.length;
-        	
-        	var parDuration = count / speed;
-        	timeDiv.text(calculateTime(parDuration * 60));
-        }
+        updateParagraphTime();
     }
 }
 
@@ -518,7 +613,7 @@ function getWordCount(text)
 {
     var text = text + "";
     var words = text.split(" ");
-    
+
     return words.length;
 }
 
@@ -541,14 +636,14 @@ function getRemainingScroll()
 {
     var currentScroll = parseInt(canvas.scrollTop());
     var remainingScroll = canvas.get(0).scrollHeight - currentScroll;
-    console.log('remainingScroll=' + remainingScroll);
+    //console.log('remainingScroll=' + remainingScroll);
     return remainingScroll;
 }
 
 function grabText()
 {
     var text = canvas.text();
-//    console.log(text);
+//    //console.log(text);
     return text;
 }
 
@@ -559,7 +654,7 @@ function addWordEvents()
     $('.word').on('click', function()
     {
         var self = $(this);
-        console.log(self.text() + ' clicked');
+        //console.log(self.text() + ' clicked');
         if (self.hasClass('highlighted-word'))
             self.removeClass('highlighted-word');
         else
