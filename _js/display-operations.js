@@ -154,7 +154,7 @@ function addBaseEvents()
         event.value = '';
         event.user = getCurrentUserId();
         logEventToDb(event);
-        console.log('feedback');
+        //console.log('feedback');
 //           $("#feedback-popup", $('#page')).popup("open");
 //       $('#feedback-popup').show();
     });
@@ -167,7 +167,7 @@ function addBaseEvents()
         event.value = '';
         event.user = getCurrentUserId();
         logEventToDb(event);
-        console.log('submit feedback');
+        //console.log('submit feedback');
         storeFeedback();
 //           $("#feedback-popup", $('#page')).popup("open");
 //       $('#feedback-popup').show();
@@ -251,7 +251,7 @@ function addMenuEvents()
             $('.paragraph-label, .paragraph-time').css('font-size', '2em');
         else
             $('.paragraph-label, .paragraph-time').css('font-size', fontSize + 'em');
-//        console.log('line H=' + canvas.css('line-height'));
+//        //console.log('line H=' + canvas.css('line-height'));
         var event = new Event();
         event.target = 'Smaller Font';
         event.value = fontSize + '';
@@ -429,7 +429,7 @@ function updateHighlightedWords()
     var progress = getProgress();
     var wordCount = wordIds.length;
     var lastWord = Math.ceil(progress * wordCount);
-    console.log('last word=' + lastWord + "\t" + wordIds[lastWord]);
+//    //console.log('last word=' + lastWord + "\t" + wordIds[lastWord]);
 
     for (var i = 0; i < wordCount; i++)
     {
@@ -496,7 +496,7 @@ function updateSlider() {
 //    var val = speedSlider.val();
 //    speed = (val === 0) ? 0 : minSpeed + val * increment;
 
-//    console.log(speed);
+//    //console.log(speed);
 
     speedSlider.change(function()
     {
@@ -557,7 +557,7 @@ function updateParagraphTime()
 
 
 
-//        console.log(remDuration+"\t"+remTime+"\t"+duration+"\t"+durationTime);
+//        //console.log(remDuration+"\t"+remTime+"\t"+duration+"\t"+durationTime);
     }
 }
 function updateSpeed() {
@@ -636,14 +636,14 @@ function getRemainingScroll()
 {
     var currentScroll = parseInt(canvas.scrollTop());
     var remainingScroll = canvas.get(0).scrollHeight - currentScroll;
-    console.log('remainingScroll=' + remainingScroll);
+    //console.log('remainingScroll=' + remainingScroll);
     return remainingScroll;
 }
 
 function grabText()
 {
     var text = canvas.text();
-//    console.log(text);
+//    //console.log(text);
     return text;
 }
 
@@ -654,7 +654,7 @@ function addWordEvents()
     $('.word').on('click', function()
     {
         var self = $(this);
-        console.log(self.text() + ' clicked');
+        //console.log(self.text() + ' clicked');
         if (self.hasClass('highlighted-word'))
             self.removeClass('highlighted-word');
         else

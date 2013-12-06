@@ -7,7 +7,7 @@ function saveAction(action)
 {
     $('#sendForm').on('click', function()
     {
-        console.log('sending user info');
+        //console.log('sending user info');
         var age = parseInt($('#ag').val());
         var gender = $('#gen').val();
         var location = $('#loc').val();
@@ -17,7 +17,7 @@ function saveAction(action)
         var sql = "insert into podium_users (gender, age,education,location, temp_id)"
                 + " values ('" + gender + "'," + ((age)?age:"''") + ",'" + education + "','" + location + "'," + temp_id + ")";
 
-        console.log(sql);
+        //console.log(sql);
         var jqXHR = $.ajax({
             'type': 'GET',
             'url': DB_FILE,
@@ -30,7 +30,7 @@ function saveAction(action)
         var sql2 = "select * from podium_users where temp_id=" + temp_id;
 
 
-        console.log(sql2);
+        //console.log(sql2);
         var jqXHR2 = $.ajax({
             'type': 'GET',
             'url': DB_FILE,
@@ -42,9 +42,9 @@ function saveAction(action)
 
 
         var data = $.parseJSON(jqXHR2.responseText);
-        console.log(data);
+        //console.log(data);
         setCurrentUserId(parseInt(data[0]['user_id']));
-//        console.log(data);
+//        //console.log(data);
 
     });
 }
