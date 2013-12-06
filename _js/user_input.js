@@ -42,9 +42,13 @@ function saveAction(action)
 
 
         var data = $.parseJSON(jqXHR2.responseText);
-        //console.log(data);
-        setCurrentUserId(parseInt(data[0]['user_id']));
-//        //console.log(data);
-
+        
+        if(data != null) {
+        	if(data[0] != null) {
+        		//console.log(data);
+        		setCurrentUserId(parseInt(data[0]['user_id']));
+        		//console.log(data);
+			}
+		}
     });
 }
