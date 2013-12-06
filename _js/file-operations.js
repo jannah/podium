@@ -37,6 +37,16 @@ function processFile(file)
 
 }
 
+function loadRemoteFile(path)
+{
+    var request = new XMLHttpRequest();
+    request.open("GET", path, false);
+    request.send(null);
+    var text = request.responseText;
+    processText(text);
+//    return returnValue;
+}
+
 function readFileAsText(file)
 {
 
@@ -121,11 +131,11 @@ function cleanParagraph(para, paraIndex)
                 var wordId = "word-" + paraIndex + "-" + i + "-" + k;
                 wordIds.push(wordId);
                 if (word && word.length > 0)
-                    wout += "<span id='"+wordId
+                    wout += "<span id='" + wordId
                             + "' class='word-" + k + " word'>"
                             + word + " </span>";
             }
-            
+
             outCount++;
             sout = "<span id='sentence-" + paraIndex + "-" + i + "' class='sentence sentence-" + outCount + "' class='sentence'>"
                     + wout.trim() + " </span>";
@@ -148,7 +158,7 @@ function saveCurrentFile()
 function processText(text)
 {
     var output = "";
-    wordIds=[];
+    wordIds = [];
     paragraphs = text.split("\n");
 
 //        console.log(paragraphs);
