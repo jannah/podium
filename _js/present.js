@@ -25,8 +25,8 @@ function initPresentOps() {
 }
 
 function addPresentEvents() {
+
 	btnPlay.click(function() {
-		// Start scrolling based on the speed
 		startPresentation();
 	});
 	
@@ -41,6 +41,7 @@ function addPresentEvents() {
 
 function startPresentation() {
 	// Can only start if there is a file
+	
 	if(fileOpened == true) {
 		console.log("Presentation started...");
 	
