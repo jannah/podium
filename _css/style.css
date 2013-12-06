@@ -39,8 +39,8 @@ root {
 #page
 {
     overflow: hidden;
-    margin-left: 0px;
-    padding-left: 0px;
+    margin-left: 0px !important;
+    padding: 0px !important;
 }
 
 .content-primary {
@@ -201,9 +201,9 @@ a.ui-slider-handle-vertical, a.ui-slider-handle-verticalInverted {
     
     float: left;
 
-    width: -moz-calc(100% - 150px);
-    width: -webkit-calc(100% - 150px);
-    width: calc(100% - 150px);
+    width: -moz-calc(100% - 60px);
+    width: -webkit-calc(100% - 160px);
+    width: calc(100% - 160px);
 }
 
 .paragraph-time {

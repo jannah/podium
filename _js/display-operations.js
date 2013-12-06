@@ -100,7 +100,7 @@ function setCanvasHeight()
     slidePanel.css('height', height);
 
     rightMenu.css('height', height);
-    rightMenu.css('top', headHeight);
+    rightMenu.css('top', headHeight - 2);
 }
 
 function addBaseEvents()
