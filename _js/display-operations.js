@@ -50,8 +50,8 @@ function initDisplay()
     inpOpenFile = $('#open-file');
     btnSpeech1 = $('#speech-1');
     btnSpeech2 = $('#speech-2');
-btnFeedback = $('#feedback-button');
-btnSubmitFeedback = $('#submit-feedback');
+	btnFeedback = $('#feedback-button');
+	btnSubmitFeedback = $('#submit-feedback');
     inpOpenFile.css('opacity', 0);
     inpOpenFile.css('filter', 'alpha(opacity = 0');
     inpOpenFile.hide();
@@ -135,6 +135,8 @@ function addBaseEvents()
         event.user = getCurrentUserId();
         logEventToDb(event);
         loadRemoteFile('./resources/speech1.txt');
+        
+        fileOpened = true;
     });
     btnSpeech2.click(function() {
         var event = new Event();
@@ -144,6 +146,8 @@ function addBaseEvents()
         event.user = getCurrentUserId();
         logEventToDb(event);
         loadRemoteFile('./resources/speech2.txt');
+        
+        fileOpened = true;
     });
     
     btnFeedback.click(function()
