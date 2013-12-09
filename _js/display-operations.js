@@ -22,9 +22,9 @@ var slidePanel;
 var speedSlider;
 var speed = 0;
 var minSpeed = 50;
-var maxSpeed = 400;
-var speedFactor = 10;
-var increment = 10;
+var maxSpeed = 300;
+//var speedFactor = 10;
+var increment = 5;
 var speedSteps;
 
 var timeEstimate = 0;
@@ -50,8 +50,8 @@ function initDisplay()
     inpOpenFile = $('#open-file');
     btnSpeech1 = $('#speech-1');
     btnSpeech2 = $('#speech-2');
-	btnFeedback = $('#feedback-button');
-	btnSubmitFeedback = $('#submit-feedback');
+    btnFeedback = $('#feedback-button');
+    btnSubmitFeedback = $('#submit-feedback');
     inpOpenFile.css('opacity', 0);
     inpOpenFile.css('filter', 'alpha(opacity = 0');
     inpOpenFile.hide();
@@ -135,7 +135,7 @@ function addBaseEvents()
         event.user = getCurrentUserId();
         logEventToDb(event);
         loadRemoteFile('./resources/speech1.txt');
-        
+
         fileOpened = true;
     });
     btnSpeech2.click(function() {
@@ -146,13 +146,13 @@ function addBaseEvents()
         event.user = getCurrentUserId();
         logEventToDb(event);
         loadRemoteFile('./resources/speech2.txt');
-        
+
         fileOpened = true;
     });
-    
+
     btnFeedback.click(function()
     {
-         var event = new Event();
+        var event = new Event();
         event.action = 0;
         event.target = 'Feedback';
         event.value = '';
@@ -162,10 +162,10 @@ function addBaseEvents()
 //           $("#feedback-popup", $('#page')).popup("open");
 //       $('#feedback-popup').show();
     });
-    
-        btnSubmitFeedback.click(function()
+
+    btnSubmitFeedback.click(function()
     {
-         var event = new Event();
+        var event = new Event();
         event.action = 0;
         event.target = 'Submit Feedback';
         event.value = '';
@@ -504,9 +504,15 @@ function updateSlider() {
 
     speedSlider.change(function()
     {
+        console.log('changing speed');
         var value = $(this).val();
         speed = (value === 0) ? 0 : minSpeed + value * increment;
-
+        var event = new Event();
+        event.action = 0;
+        event.target = 'Change Speed';
+        event.value = speed + " (" + value + ")";
+        event.user = getCurrentUserId();
+        logEventToDb(event);
         pageScroll();
     });
 }
@@ -659,10 +665,23 @@ function addWordEvents()
     {
         var self = $(this);
         //console.log(self.text() + ' clicked');
+        var val = ""
         if (self.hasClass('highlighted-word'))
+        {
             self.removeClass('highlighted-word');
-        else
+            val = "Remove";
+        } else
+        {
             self.addClass('highlighted-word');
+            val = "Add";
+
+        }
+        var event = new Event();
+        event.action = 0;
+        event.target = 'Highlighted Word';
+        event.value = val;
+        event.user = getCurrentUserId();
+        logEventToDb(event);
     })
 }
 
