@@ -119,10 +119,10 @@ function addBaseEvents()
         var event = new Event();
         event.action = 0;
         event.target = 'Open File';
-        event.value = file.name;
+        event.value = '';
         event.user = getCurrentUserId();
         logEventToDb(event);
-        logEventToDb(event);
+//        logEventToDb(event);
         inpOpenFile.trigger('click');
         return false;
     });

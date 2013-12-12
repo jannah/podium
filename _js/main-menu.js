@@ -23,14 +23,20 @@ function newFile() {
 function openFile()
 {
 
-    console.log('openning-file');
+
     var fileSelector = $('#open-file');
 //    console.log(fileSelector);
     var file = fileSelector.get(0).files[0];
-
+    var event = new Event();
+    event.action = 0;
+    event.target = 'File Opened';
+    event.value = file.name;
+    event.user = getCurrentUserId();
+        console.log('openning-file '+file.name);
+    logEventToDb(event);
 //    console.log(file);
     processFile(file);
-    
+
     // Set opened file to true
     fileOpened = true;
 }
