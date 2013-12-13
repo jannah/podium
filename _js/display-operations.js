@@ -6,7 +6,6 @@
 var canvas;
 var primaryContent;
 var body;
-var slider;
 var navpanel;
 var playpanel;
 var btnOpenFile;
@@ -493,6 +492,11 @@ function initSlider()
             .prop('max', speedSteps)
             .prop('step', 1)
             .prop('value', 0);
+    
+    // Initialize a speed
+    var value = speedSlider.val();
+    speed = (value === 0) ? 0 : minSpeed + value * increment;
+    pageScroll;
 }
 
 function updateSlider() {
