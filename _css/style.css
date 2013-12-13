@@ -240,7 +240,7 @@ a.ui-slider-handle-vertical, a.ui-slider-handle-verticalInverted {
 .done-word{
 
     color: rgb(120,120,120);
-    text-decoration: underline;
+    /*text-decoration: underline;*/
 }
 
 .big {

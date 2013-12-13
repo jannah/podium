@@ -12,7 +12,7 @@ var playpanel;
 var btnOpenFile;
 var inpOpenFile;
 var btnNewFile;
-var btnSpeech1, btnSpeech2, btnFeedback, btnSubmitFeedback;
+var btnSpeech1, btnSpeech2, btnSpeech3, btnFeedback, btnSubmitFeedback;
 var fontSize = 1;
 var cntTime;
 var cntTotalTime;
@@ -50,6 +50,8 @@ function initDisplay()
     inpOpenFile = $('#open-file');
     btnSpeech1 = $('#speech-1');
     btnSpeech2 = $('#speech-2');
+        btnSpeech3 = $('#speech-3');
+
     btnFeedback = $('#feedback-button');
     btnSubmitFeedback = $('#submit-feedback');
     inpOpenFile.css('opacity', 0);
@@ -146,6 +148,17 @@ function addBaseEvents()
         event.user = getCurrentUserId();
         logEventToDb(event);
         loadRemoteFile('./resources/speech2.txt');
+
+        fileOpened = true;
+    });
+     btnSpeech3.click(function() {
+        var event = new Event();
+        event.action = 0;
+        event.target = 'Test File';
+        event.value = 'Speech 3';
+        event.user = getCurrentUserId();
+        logEventToDb(event);
+        loadRemoteFile('./resources/speech3.txt');
 
         fileOpened = true;
     });
